@@ -14,18 +14,22 @@ struct CategoryItem: View {
 		VStack(alignment: .leading) {
 			ZStack {
 				if let url = product.picture.imageURL { //optionnel donc vérif pas nil
-					asyncImage(from: url)
+					AsyncImageView(url: url)
 				}
 				
 				LikesPill(product: product)
 					.offset(x: 60, y: 75)
 			}
 			
-
 			VStack(spacing: 3) {
-				HStack {
-					Text(product.name)
-						.font(.system(size: 14, weight: .semibold, design: .default))
+				HStack(alignment: .top) {
+					VStack(alignment: .leading, spacing: 0) {
+						Text(product.name)
+							.font(.system(size: 14, weight: .semibold, design: .default))
+							.multilineTextAlignment(.leading)
+							.lineLimit(nil)       // aucune limite de lignes
+							.fixedSize(horizontal: false, vertical: true)
+					}
 					Spacer()
 					HStack(spacing: 2) {
 						Image(systemName: "star.fill")
@@ -35,7 +39,7 @@ struct CategoryItem: View {
 							.font(.system(size: 14))
 					}
 				}
-				
+				.frame(maxWidth: 182)
 				
 				HStack {
 					Text("\(String(format: "%.0f", product.price))€") //arrondi 0 chiffres aprèsla virgule
@@ -47,9 +51,10 @@ struct CategoryItem: View {
 						.font(.system(size: 14))
 						.foregroundColor(Color.black.opacity(0.8))
 				}
+				Spacer()
 			}
-			.padding(.leading, 8)
-			.padding(.trailing, 8)
+			.padding(.horizontal, 8)
+			.frame(height: 65)
 		}
 		.padding(.leading, 15)
 		.padding(.trailing, -5)
@@ -59,25 +64,4 @@ struct CategoryItem: View {
 #Preview {
 	let product = Product(id: 32, picture: Product.Picture(url: "", description: ""), name: "test", likes: 10, price: 100, originalPrice: 110, category: .bottoms)
 	CategoryItem(product: product)
-}
-
-extension CategoryItem {
-	func asyncImage(from url: URL) -> some View {
-		AsyncImage(url: url) { phase in
-			switch phase {
-			case .empty:
-				ProgressView()
-			case .success(let image):
-				image
-					.resizable()
-					.aspectRatio(contentMode: .fill)
-					.frame(width: 198, height: 198)
-					.cornerRadius(16)
-			case .failure:
-				Image(systemName: "photo")
-			@unknown default:
-				EmptyView()
-			}
-		}
-	}
 }

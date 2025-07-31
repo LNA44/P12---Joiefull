@@ -20,11 +20,14 @@ struct CategoryRow: View {
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack (alignment: .top, spacing: 0){
 					ForEach(items) { product in
-						CategoryItem(product: product)
+						NavigationLink(destination: DetailsView(product: product)) {
+							CategoryItem(product: product)
+						}
+						.buttonStyle(PlainButtonStyle())
 					}
 				}
 			}
-			.frame(height: 280)
+			.frame(height: 300)
 	}
 }
 
