@@ -23,6 +23,8 @@ struct DetailsView: View {
 							.onTapGesture {
 								isImageFullscreen = true
 							}
+							.accessibilityElement()
+							.accessibilityLabel("\(product.picture.description)")
 					}
 				}
 				LikesPill(product: product, containerWidth: 89, containerHeight: 45, textSize: 22, heartSize: 21)
@@ -33,6 +35,7 @@ struct DetailsView: View {
 				HStack {
 					Text("\(product.name)")
 						.font(.system(size: 22, weight: .semibold, design: .default))
+						.accessibilityHidden(true)
 					Spacer()
 					HStack(spacing: 2) {
 						Image(systemName: "star.fill")
@@ -42,8 +45,12 @@ struct DetailsView: View {
 							.font(.system(size: 22))
 					}
 				}
+				.accessibilityElement()
+				.accessibilityLabel("\(product.name) noté 10 étoiles")
+				//.accessibilityLabel("\(product.name) noté \(nombreEtoiles) étoiles")
 				
 			}
+			.padding(.top, 20)
 			.padding(.horizontal, 20)
 			
 			HStack {
@@ -56,7 +63,10 @@ struct DetailsView: View {
 					.font(.system(size: 22))
 					.foregroundColor(Color.black.opacity(0.8))
 			}
+			.padding(.bottom, 20)
 			.padding(.horizontal, 20)
+			.accessibilityElement()
+			.accessibilityLabel("Prix : \(Int(product.price)), prix d'origine : \(Int(product.originalPrice))")
 
 			HStack {
 				Text("\(product.picture.description)")
@@ -68,8 +78,10 @@ struct DetailsView: View {
 			
 			HStack (spacing: 20){
 				Image("Mask group")
+					.accessibilityLabel("Image de profil utilisateur")
 				StarRatingView(rating: $userRating)
 					.padding(.bottom, 5)
+					.accessibilityLabel("Note de l'utilisateur de 1 à 5 étoiles")
 				Spacer()
 			}
 			.padding(.horizontal, 20)
@@ -82,12 +94,14 @@ struct DetailsView: View {
 						RoundedRectangle(cornerRadius: 8)
 							.stroke(Color.gray.opacity(0.5), lineWidth: 1)
 					)
+					.accessibilityLabel("Partagez ici vos impressions sur cette pièce")
 				}
 			.padding(.horizontal, 20)
 			.padding(.top, 15)
 		}
 		.sheet(isPresented: $isImageFullscreen) {
 			FullscreenImageView(imageURL: product.picture.imageURL)
+				.accessibilityLabel("Image en plein écran")
 		}
 		.navigationBarBackButtonHidden(true)  // Cache le bouton retour natif
 		.toolbar {
