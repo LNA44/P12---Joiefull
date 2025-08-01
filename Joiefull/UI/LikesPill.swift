@@ -15,18 +15,22 @@ struct LikesPill: View {
 	var heartSize = 14
     var body: some View {
 		ZStack {
-			RoundedRectangle(cornerRadius: 20)
-				.fill(Color.white)
-				.frame(width:CGFloat(containerWidth), height:CGFloat(containerHeight))
-			
-			HStack(spacing: 5) {
-				Image(systemName: "heart")
-					.frame(width: CGFloat(heartSize))
+			Button (action: {
+			}) {
+				RoundedRectangle(cornerRadius: 20)
+					.fill(Color.white)
+					.frame(width:CGFloat(containerWidth), height:CGFloat(containerHeight))
 				
-				Text("\(product.likes)")
-					.font(.system(size: CGFloat(textSize), weight: .semibold, design: .default))
-					.foregroundColor(.black)
+				HStack(spacing: 5) {
+					Image(systemName: "heart")
+						.frame(width: CGFloat(heartSize))
+					
+					Text("\(product.likes)")
+						.font(.system(size: CGFloat(textSize), weight: .semibold, design: .default))
+						.foregroundColor(.black)
+				}
 			}
+			
 		}
 		.accessibilityElement()
 		.accessibilityLabel("Le produit a été aimé par \(product.likes) d'utilisateurs")

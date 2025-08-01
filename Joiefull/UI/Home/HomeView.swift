@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct HomeView: View {
-	@ObservedObject var viewModel: HomeViewModel
+	@StateObject var viewModel: HomeViewModel
+	
+	init() {
+		let repository = JoiefullRepository()
+		_viewModel = StateObject(wrappedValue: HomeViewModel(repository: repository))
+	}
 	
 	var body: some View {
 		NavigationView {
@@ -28,6 +33,11 @@ struct HomeView: View {
 				Task {
 					await viewModel.fetchProducts()
 				}
+			}
+		}
+		.onAppear {
+			Task {
+				await viewModel.fetchProducts()
 			}
 		}
 	}

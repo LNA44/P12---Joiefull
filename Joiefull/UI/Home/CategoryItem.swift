@@ -19,8 +19,28 @@ struct CategoryItem: View {
 						.accessibilityLabel("\(product.picture.description)")
 				}
 				
-				LikesPill(product: product)
-					.offset(x: 60, y: 75)
+				ZStack {
+					Button (action: {
+					}) {
+						RoundedRectangle(cornerRadius: 20)
+							.fill(Color.white)
+							.frame(width:CGFloat(51), height:CGFloat(27))
+							.offset(x: 80, y: 75)
+
+						HStack(spacing: 5) {
+							Image(systemName: "heart")
+								.frame(width: CGFloat(14))
+								.foregroundColor(.black)
+							
+							Text("\(product.likes)")
+								.font(.system(size: CGFloat(14), weight: .semibold, design: .default))
+								.foregroundColor(.black)
+						}
+						.offset(x: 28, y: 75)
+					}
+				}
+				.accessibilityElement()
+				.accessibilityLabel("Le produit a été aimé par \(product.likes) d'utilisateurs")
 			}
 			
 			VStack(spacing: 3) {

@@ -13,7 +13,7 @@ struct LaunchView: View {
 	
 	var body: some View {
 		if isActive {
-			HomeView(viewModel: HomeViewModel(repository: repository))
+			HomeView()
 		} else {
 			VStack {
 				Spacer()
