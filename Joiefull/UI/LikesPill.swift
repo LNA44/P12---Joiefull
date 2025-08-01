@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct LikesPill: View {
-	let product: Product
+	var product: Product
+	var containerWidth = 51
+	var containerHeight = 27
+	var textSize = 14
+	var heartSize = 14
     var body: some View {
 		ZStack {
 			RoundedRectangle(cornerRadius: 20)
 				.fill(Color.white)
-				.frame(width:51, height:27)
+				.frame(width:CGFloat(containerWidth), height:CGFloat(containerHeight))
 			
 			HStack(spacing: 5) {
 				Image(systemName: "heart")
-					.frame(width: 14)
+					.frame(width: CGFloat(heartSize))
 				
 				Text("\(product.likes)")
-					.font(.system(size: 14, weight: .semibold, design: .default))
+					.font(.system(size: CGFloat(textSize), weight: .semibold, design: .default))
 					.foregroundColor(.black)
 			}
 		}

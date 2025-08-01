@@ -12,7 +12,8 @@ struct JoiefullApp: App {
     var body: some Scene {
         WindowGroup {
 			let repository = JoiefullRepository()
-			LaunchView(repository: repository)
+			let homeViewModel = HomeViewModel(repository: repository)
+			ContentView(viewModel: homeViewModel)
         }
     }
 }
