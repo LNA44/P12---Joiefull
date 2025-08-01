@@ -10,9 +10,23 @@ import SwiftUI
 struct DetailsView: View {
 	var product: Product
 	@Environment(\.dismiss) private var dismiss  // Pour fermer la vue
+	@StateObject var viewModel: DetailsViewModel
 	@State private var isImageFullscreen = false
 	@State private var userRating: Int = 0 //State lance un rafraichissement de l'interface
 	@State private var userComment: String = "" //modifie la vue à chaque nouvelle lettre tapée
+	@State private var showShareSheet = false
+	@State private var sharingComment: String = ""
+	private var ratingAverage: Double {
+		viewModel.averageRating(productId: product.id)
+	}
+	@State private var isUserFavorite: Bool = false
+	@State private var localFavorites: Int
+	
+	init(product: Product) {
+		_viewModel = StateObject(wrappedValue: DetailsViewModel())
+		self.product = product
+		_localFavorites = State(initialValue: product.likes)
+	}
 	
     var body: some View {
 		VStack {
@@ -27,8 +41,44 @@ struct DetailsView: View {
 							.accessibilityLabel("\(product.picture.description)")
 					}
 				}
-				LikesPill(product: product, containerWidth: 89, containerHeight: 45, textSize: 22, heartSize: 21)
-					.offset(x: 125, y: 160)
+				ZStack {
+					Button (action: {
+						if isUserFavorite {
+							localFavorites -= 1
+						} else {
+							localFavorites += 1
+						}
+						isUserFavorite.toggle()
+					}) {
+						RoundedRectangle(cornerRadius: 20)
+							.fill(Color.white)
+							.frame(width:CGFloat(89), height:CGFloat(45))
+							.overlay(
+								HStack(spacing: 5) {
+									Image(systemName: isUserFavorite ? "heart.fill" : "heart")
+										.frame(width: 22)
+										.foregroundColor(.black)
+									
+									Text("\(localFavorites)")
+										.font(.system(size: 21, weight: .semibold))
+										.foregroundColor(.black)
+								}
+							)
+					}
+					.offset(x:120, y: 160)
+				}
+				.accessibilityElement()
+				.accessibilityLabel("Le produit a été aimé par \(product.likes) d'utilisateurs")
+
+				Button(action: {
+					showShareSheet = true
+				}) {
+					Image("Share")
+				}
+				.position(x: 360, y: 40)
+				.sheet(isPresented: $showShareSheet) {
+					ShareSheet(comment: sharingComment, productDescription: product.picture.description, isPresented: $showShareSheet)
+				}
 			}
 			
 			HStack {
@@ -41,13 +91,12 @@ struct DetailsView: View {
 						Image(systemName: "star.fill")
 							.foregroundColor(.orange)
 							.font(.system(size: 23))
-						Text("10")
+						Text(String(format: "%.1f", ratingAverage))
 							.font(.system(size: 22))
 					}
 				}
 				.accessibilityElement()
-				.accessibilityLabel("\(product.name) noté 10 étoiles")
-				//.accessibilityLabel("\(product.name) noté \(nombreEtoiles) étoiles")
+				.accessibilityLabel("\(product.name) noté \(ratingAverage) étoiles")
 				
 			}
 			.padding(.top, 20)
@@ -82,6 +131,11 @@ struct DetailsView: View {
 				StarRatingView(rating: $userRating)
 					.padding(.bottom, 5)
 					.accessibilityLabel("Note de l'utilisateur de 1 à 5 étoiles")
+					.onChange(of: userRating) { newValue in
+						if newValue > 0 {
+							viewModel.addRating(productId: product.id, rating: newValue)
+						}
+					}
 				Spacer()
 			}
 			.padding(.horizontal, 20)
@@ -119,6 +173,7 @@ struct DetailsView: View {
 	}
 }
 
-#Preview {
+/*#Preview {
 	DetailsView(product: Product(id: 32, picture: Product.Picture(url: "https://raw.githubusercontent.com/LNA44/P12---Creez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/accessories/1.jpg", description: "Description de la photo avec un sac à main orange"), name: "Sac orange", likes: 10, price: 100, originalPrice: 110, category: .bottoms))
 }
+*/

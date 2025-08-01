@@ -11,9 +11,7 @@ import SwiftUI
 struct JoiefullApp: App {
     var body: some Scene {
         WindowGroup {
-			let repository = JoiefullRepository()
-			let homeViewModel = HomeViewModel(repository: repository)
-			ContentView(viewModel: homeViewModel)
+			ContentView()
         }
     }
 }
