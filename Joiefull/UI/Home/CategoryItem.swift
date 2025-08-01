@@ -15,6 +15,8 @@ struct CategoryItem: View {
 			ZStack {
 				if let url = product.picture.imageURL { //optionnel donc vérif pas nil
 					AsyncImageView(url: url)
+						.accessibilityElement()
+						.accessibilityLabel("\(product.picture.description)")
 				}
 				
 				LikesPill(product: product)
@@ -29,6 +31,7 @@ struct CategoryItem: View {
 							.multilineTextAlignment(.leading)
 							.lineLimit(nil)       // aucune limite de lignes
 							.fixedSize(horizontal: false, vertical: true)
+							.accessibilityHidden(true)
 					}
 					Spacer()
 					HStack(spacing: 2) {
@@ -38,6 +41,9 @@ struct CategoryItem: View {
 						Text("10")
 							.font(.system(size: 14))
 					}
+					.accessibilityElement()
+					.accessibilityLabel("10 personnes l'ont ajouté en favoris")
+					//.accessibilityLabel("\(nombreFavoris) personnes l'ont ajouté en favoris")
 				}
 				.frame(maxWidth: 182)
 				
@@ -51,6 +57,8 @@ struct CategoryItem: View {
 						.font(.system(size: 14))
 						.foregroundColor(Color.black.opacity(0.8))
 				}
+				.accessibilityElement()
+				.accessibilityLabel("Prix réduit : \(Int(product.price)) euros; prix d'origine : \(Int(product.originalPrice)) euros, barré.")
 				Spacer()
 			}
 			.padding(.horizontal, 8)

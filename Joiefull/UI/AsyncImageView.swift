@@ -11,25 +11,26 @@ struct AsyncImageView: View {
 	let url: URL
 	var width: CGFloat = 198
 	var height: CGFloat = 198
-		
-		var body: some View {
-			AsyncImage(url: url) { phase in
-				switch phase {
-				case .empty:
-					ProgressView()
-				case .success(let image):
-					image
-						.resizable()
-						.aspectRatio(contentMode: .fill)
-						.frame(width: width, height: height)
-						.cornerRadius(16)
-				case .failure:
-					Image(systemName: "photo")
-				@unknown default:
-					EmptyView()
-				}
+	
+	var body: some View {
+		AsyncImage(url: url) { phase in
+			switch phase {
+			case .empty:
+				ProgressView()
+			case .success(let image):
+				image
+					.resizable()
+					.aspectRatio(contentMode: .fill)
+					.frame(width: width, height: height)
+					.cornerRadius(16)
+			case .failure:
+				Image(systemName: "photo")
+					.accessibilityLabel("Image non disponible")
+			@unknown default:
+				EmptyView()
 			}
 		}
+	}
 }
 
 #Preview {

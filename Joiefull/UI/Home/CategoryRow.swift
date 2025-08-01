@@ -10,12 +10,15 @@ import SwiftUI
 struct CategoryRow: View {
 	var categoryName: String
 	var items: [Product]
+	@AccessibilityFocusState private var isFocused: Bool
+	
     var body: some View {
 			VStack {
 				Text(categoryName)
 					.font(.system(size: 22, weight: .semibold, design: .default))
 					.padding(.leading, 15)
 					.padding(.top, 5)
+					.accessibilitySortPriority(1)
 			}
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack (alignment: .top, spacing: 0){
@@ -27,7 +30,7 @@ struct CategoryRow: View {
 					}
 				}
 			}
-			.frame(height: 300)
+			.frame(height: 310)
 	}
 }
 

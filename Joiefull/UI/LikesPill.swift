@@ -28,6 +28,8 @@ struct LikesPill: View {
 					.foregroundColor(.black)
 			}
 		}
+		.accessibilityElement()
+		.accessibilityLabel("Le produit a été aimé par \(product.likes) d'utilisateurs")
 	}
 }
 
