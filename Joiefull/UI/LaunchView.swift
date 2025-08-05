@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LaunchView: View {
 	@State private var isActive = false
-	let repository: JoiefullRepository
 	
 	var body: some View {
 		if isActive {

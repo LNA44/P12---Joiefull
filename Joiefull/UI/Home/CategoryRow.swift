@@ -9,8 +9,15 @@ import SwiftUI
 
 struct CategoryRow: View {
 	var categoryName: String
-	var items: [Product]
+	var items: [Product] = []
 	@AccessibilityFocusState private var isFocused: Bool
+	@EnvironmentObject var ratingsVM: RatingsViewModel
+	@EnvironmentObject var favoriteVM: FavoriteViewModel
+	
+	init(categoryName: String = "", items: [Product] = []) {
+		self.categoryName = categoryName
+		self.items = items
+	}
 	
     var body: some View {
 			VStack {
@@ -23,8 +30,12 @@ struct CategoryRow: View {
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack (alignment: .top, spacing: 0){
 					ForEach(items) { product in
-						NavigationLink(destination: DetailsView(product: product)) {
+						NavigationLink(destination: DetailsView(product: product)
+							.environmentObject(ratingsVM)
+							.environmentObject(favoriteVM)
+						) {
 							CategoryItem(product: product)
+									
 						}
 						.buttonStyle(PlainButtonStyle())
 					}

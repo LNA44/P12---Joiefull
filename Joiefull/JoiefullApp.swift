@@ -9,9 +9,23 @@ import SwiftUI
 
 @main
 struct JoiefullApp: App {
-    var body: some Scene {
-        WindowGroup {
-			ContentView()
-        }
-    }
+	@State private var showLaunchView = true
+	
+	var body: some Scene {
+		WindowGroup {
+			if showLaunchView {
+				LaunchView()
+					.onAppear {
+						// Simuler un délai de lancement, puis passer à ContentView
+						DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+							withAnimation {
+								showLaunchView = false
+							}
+						}
+					}
+			} else {
+				ContentView()
+			}
+		}
+	}
 }

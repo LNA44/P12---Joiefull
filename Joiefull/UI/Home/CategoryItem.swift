@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct CategoryItem: View {
+	@EnvironmentObject var ratingsVM: RatingsViewModel
+	@EnvironmentObject var favoriteVM: FavoriteViewModel
+
 	var product: Product
-	
+
 	var body: some View {
-		VStack(alignment: .leading) {
+		VStack() {
 			ZStack {
 				if let url = product.picture.imageURL { //optionnel donc vérif pas nil
 					AsyncImageView(url: url)
@@ -28,11 +31,11 @@ struct CategoryItem: View {
 							.offset(x: 80, y: 75)
 
 						HStack(spacing: 5) {
-							Image(systemName: "heart")
+							Image(systemName: favoriteVM.isFavorite(product.id) ? "heart.fill" : "heart")
 								.frame(width: CGFloat(14))
 								.foregroundColor(.black)
 							
-							Text("\(product.likes)")
+							Text("\(favoriteVM.likesCount(for: product.id))")
 								.font(.system(size: CGFloat(14), weight: .semibold, design: .default))
 								.foregroundColor(.black)
 						}
@@ -58,14 +61,12 @@ struct CategoryItem: View {
 						Image(systemName: "star.fill")
 							.foregroundColor(.orange)
 							.font(.system(size: 12))
-						Text("10")
+						Text(String(format: "%.1f", ratingsVM.getAverage(for: product.id)))
 							.font(.system(size: 14))
 					}
 					.accessibilityElement()
-					.accessibilityLabel("10 personnes l'ont ajouté en favoris")
-					//.accessibilityLabel("\(nombreFavoris) personnes l'ont ajouté en favoris")
+					.accessibilityLabel("Ce produit a reçu une note moyenne de \(String(format: "%.1f", ratingsVM.getAverage(for: product.id))) sur 5 étoiles")
 				}
-				.frame(maxWidth: 182)
 				
 				HStack {
 					Text("\(String(format: "%.0f", product.price))€") //arrondi 0 chiffres aprèsla virgule
@@ -81,15 +82,21 @@ struct CategoryItem: View {
 				.accessibilityLabel("Prix réduit : \(Int(product.price)) euros; prix d'origine : \(Int(product.originalPrice)) euros, barré.")
 				Spacer()
 			}
-			.padding(.horizontal, 8)
+			.frame(maxWidth: 182)
 			.frame(height: 65)
+		}
+		.onAppear {
+			// Initialiser les likes
+			if favoriteVM.likesCount(for: product.id) == 0 {
+				favoriteVM.setInitialLikes(for: product.id, count: product.likes)
+			}
 		}
 		.padding(.leading, 15)
 		.padding(.trailing, -5)
 	}
 }
 
-#Preview {
-	let product = Product(id: 32, picture: Product.Picture(url: "", description: ""), name: "test", likes: 10, price: 100, originalPrice: 110, category: .bottoms)
+/*#Preview {
+	let product = Product(id: 32, picture: Product.Picture(url: "https://raw.githubusercontent.com/LNA44/P12---Creez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/accessories/1.jpg", description: ""), name: "test", likes: 10, price: 100, originalPrice: 110, category: .bottoms)
 	CategoryItem(product: product)
-}
+}*/

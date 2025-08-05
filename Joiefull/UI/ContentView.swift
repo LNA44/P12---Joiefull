@@ -21,11 +21,6 @@ struct ContentView: View {
 					.foregroundColor(.gray)
 			}
 		}
-		/*.onAppear {
-			Task {
-				await viewModel.fetchProducts()
-			}
-		}*/
 	}
 }
 
