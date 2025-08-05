@@ -13,9 +13,7 @@ class FavoriteViewModel: ObservableObject {
 	@Published var userFavorites: Set<Int> = []
 	
 	//MARK: -Initialization
-	init() {
-		
-	}
+	init() {}
 	
 	//MARK: -Methods
 	func toggleFavorite(for productId: Int) {

@@ -166,22 +166,22 @@ struct DetailsView: View {
 				
 				HStack {
 					RoundedRectangle(cornerRadius: 20)
-						.fill(Color.white)
-						.frame(width:CGFloat(89), height:CGFloat(45))
+						.fill(Color.gray.opacity(0.2))
+						.frame(width:CGFloat(77), height:CGFloat(37))
 						.overlay(
 							HStack(spacing: 5) {
 								Image(systemName: "heart")
-									.frame(width: 22)
+									.frame(width: 18)
 									.foregroundColor(.black)
 								
 								Text("\(favoriteVM.userLikesCount())")
-									.font(.system(size: 21, weight: .semibold))
+									.font(.system(size: 18, weight: .semibold))
 									.foregroundColor(.black)
 							}
 						)
 					Spacer()
 				}
-				.padding(.leading, 20)
+				.padding(.leading, 60)
 			}
 			.sheet(isPresented: $isImageFullscreen) {
 				FullscreenImageView(imageURL: product.picture.imageURL)
