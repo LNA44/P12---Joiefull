@@ -6,14 +6,72 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F308989E2E390EFA00836434 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F308989A2E390EFA00836434 /* Assets.xcassets */; };
+		F308989F2E390EFA00836434 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F308989B2E390EFA00836434 /* HomeView.swift */; };
+		F30898A02E390EFA00836434 /* JoiefullApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F308989C2E390EFA00836434 /* JoiefullApp.swift */; };
+		F30898A32E390F7700836434 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30898A22E390F7700836434 /* Constants.swift */; };
+		F30898A72E39124500836434 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30898A62E39124500836434 /* APIService.swift */; };
+		F30898AA2E39141400836434 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30898A92E39141400836434 /* Product.swift */; };
+		F30898AE2E39156800836434 /* JoiefullRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30898AD2E39156800836434 /* JoiefullRepository.swift */; };
+		F30898B22E391F5000836434 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30898B12E391F5000836434 /* HomeViewModel.swift */; };
+		F30898F52E3923C100836434 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30898F42E3923C100836434 /* APIError.swift */; };
+		F308993A2E3925F100836434 /* CategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30899392E3925F100836434 /* CategoryRow.swift */; };
+		F308993C2E3928ED00836434 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F308993B2E3928ED00836434 /* CategoryItem.swift */; };
+		F33AA0332E3CEA8300E68245 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33AA0322E3CEA8300E68245 /* ShareSheet.swift */; };
+		F33AA0352E3CED6600E68245 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33AA0342E3CED6600E68245 /* DetailsViewModel.swift */; };
+		F34A0C082E3B67E90098584B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34A0C072E3B67E90098584B /* ContentView.swift */; };
+		F34A0C0A2E3B969A0098584B /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34A0C092E3B969A0098584B /* AsyncImageView.swift */; };
+		F34A0C0C2E3BC3A80098584B /* FullscreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34A0C0B2E3BC3A80098584B /* FullscreenImageView.swift */; };
+		F34A0C0E2E3BC5D50098584B /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34A0C0D2E3BC5D50098584B /* StarRatingView.swift */; };
+		F3789E2D2E41FED000B682D6 /* RatingsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3789E2C2E41FED000B682D6 /* RatingsMock.swift */; };
+		F3789E312E420D7300B682D6 /* RatingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3789E302E420D7300B682D6 /* RatingsVM.swift */; };
+		F3789E332E4226BF00B682D6 /* FavoriteVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3789E322E4226BF00B682D6 /* FavoriteVM.swift */; };
+		F38F71B52E3A669D00AD39BA /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F71B42E3A669D00AD39BA /* LaunchView.swift */; };
+		F38F71B82E3A6A8F00AD39BA /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F71B72E3A6A8F00AD39BA /* DetailsView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F3789E6D2E42324400B682D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F30898272E39083A00836434 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F308982E2E39083A00836434;
+			remoteInfo = Joiefull;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		F308982F2E39083A00836434 /* Joiefull.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joiefull.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F308989A2E390EFA00836434 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F308989B2E390EFA00836434 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F308989C2E390EFA00836434 /* JoiefullApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullApp.swift; sourceTree = "<group>"; };
+		F30898A22E390F7700836434 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F30898A62E39124500836434 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		F30898A92E39141400836434 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		F30898AD2E39156800836434 /* JoiefullRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullRepository.swift; sourceTree = "<group>"; };
+		F30898B12E391F5000836434 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		F30898F42E3923C100836434 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		F30899392E3925F100836434 /* CategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRow.swift; sourceTree = "<group>"; };
+		F308993B2E3928ED00836434 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
+		F33AA0322E3CEA8300E68245 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		F33AA0342E3CED6600E68245 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		F34A0C072E3B67E90098584B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F34A0C092E3B969A0098584B /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		F34A0C0B2E3BC3A80098584B /* FullscreenImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenImageView.swift; sourceTree = "<group>"; };
+		F34A0C0D2E3BC5D50098584B /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
+		F3789E2C2E41FED000B682D6 /* RatingsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsMock.swift; sourceTree = "<group>"; };
+		F3789E302E420D7300B682D6 /* RatingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsVM.swift; sourceTree = "<group>"; };
+		F3789E322E4226BF00B682D6 /* FavoriteVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVM.swift; sourceTree = "<group>"; };
+		F3789E692E42324400B682D6 /* JoiefullTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JoiefullTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F38F71B42E3A669D00AD39BA /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		F38F71B72E3A6A8F00AD39BA /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F30898312E39083A00836434 /* Joiefull */ = {
+		F3789E6A2E42324400B682D6 /* JoiefullTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Joiefull;
+			path = JoiefullTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,13 +84,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F3789E662E42324400B682D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		F30898262E39083A00836434 = {
 			isa = PBXGroup;
 			children = (
-				F30898312E39083A00836434 /* Joiefull */,
+				F308989D2E390EFA00836434 /* Joiefull */,
+				F3789E6A2E42324400B682D6 /* JoiefullTests */,
 				F30898302E39083A00836434 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,8 +107,86 @@
 			isa = PBXGroup;
 			children = (
 				F308982F2E39083A00836434 /* Joiefull.app */,
+				F3789E692E42324400B682D6 /* JoiefullTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F30898992E390EFA00836434 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F30898A82E39140B00836434 /* DataModel */,
+				F30898A12E390F0300836434 /* API */,
+				F3789E2C2E41FED000B682D6 /* RatingsMock.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F308989D2E390EFA00836434 /* Joiefull */ = {
+			isa = PBXGroup;
+			children = (
+				F30898992E390EFA00836434 /* Model */,
+				F308989A2E390EFA00836434 /* Assets.xcassets */,
+				F308989C2E390EFA00836434 /* JoiefullApp.swift */,
+				F30898A22E390F7700836434 /* Constants.swift */,
+				F30898A42E39115D00836434 /* UI */,
+			);
+			path = Joiefull;
+			sourceTree = "<group>";
+		};
+		F30898A12E390F0300836434 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				F30898A62E39124500836434 /* APIService.swift */,
+				F30898AD2E39156800836434 /* JoiefullRepository.swift */,
+				F30898F42E3923C100836434 /* APIError.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		F30898A42E39115D00836434 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F38F71B62E3A6A8300AD39BA /* Details */,
+				F30898A52E39117400836434 /* Home */,
+				F38F71B42E3A669D00AD39BA /* LaunchView.swift */,
+				F34A0C072E3B67E90098584B /* ContentView.swift */,
+				F34A0C092E3B969A0098584B /* AsyncImageView.swift */,
+				F3789E302E420D7300B682D6 /* RatingsVM.swift */,
+				F3789E322E4226BF00B682D6 /* FavoriteVM.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		F30898A52E39117400836434 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F308989B2E390EFA00836434 /* HomeView.swift */,
+				F30898B12E391F5000836434 /* HomeViewModel.swift */,
+				F30899392E3925F100836434 /* CategoryRow.swift */,
+				F308993B2E3928ED00836434 /* CategoryItem.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		F30898A82E39140B00836434 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				F30898A92E39141400836434 /* Product.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		F38F71B62E3A6A8300AD39BA /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				F38F71B72E3A6A8F00AD39BA /* DetailsView.swift */,
+				F33AA0342E3CED6600E68245 /* DetailsViewModel.swift */,
+				F34A0C0D2E3BC5D50098584B /* StarRatingView.swift */,
+				F34A0C0B2E3BC3A80098584B /* FullscreenImageView.swift */,
+				F33AA0322E3CEA8300E68245 /* ShareSheet.swift */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -60,15 +204,35 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				F30898312E39083A00836434 /* Joiefull */,
-			);
 			name = Joiefull;
 			packageProductDependencies = (
 			);
 			productName = Joiefull;
 			productReference = F308982F2E39083A00836434 /* Joiefull.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F3789E682E42324400B682D6 /* JoiefullTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3789E712E42324400B682D6 /* Build configuration list for PBXNativeTarget "JoiefullTests" */;
+			buildPhases = (
+				F3789E652E42324400B682D6 /* Sources */,
+				F3789E662E42324400B682D6 /* Frameworks */,
+				F3789E672E42324400B682D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3789E6E2E42324400B682D6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F3789E6A2E42324400B682D6 /* JoiefullTests */,
+			);
+			name = JoiefullTests;
+			packageProductDependencies = (
+			);
+			productName = JoiefullTests;
+			productReference = F3789E692E42324400B682D6 /* JoiefullTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -82,6 +246,10 @@
 				TargetAttributes = {
 					F308982E2E39083A00836434 = {
 						CreatedOnToolsVersion = 16.4;
+					};
+					F3789E682E42324400B682D6 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = F308982E2E39083A00836434;
 					};
 				};
 			};
@@ -100,12 +268,21 @@
 			projectRoot = "";
 			targets = (
 				F308982E2E39083A00836434 /* Joiefull */,
+				F3789E682E42324400B682D6 /* JoiefullTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F308982D2E39083A00836434 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F308989E2E390EFA00836434 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3789E672E42324400B682D6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -119,10 +296,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F34A0C0E2E3BC5D50098584B /* StarRatingView.swift in Sources */,
+				F33AA0352E3CED6600E68245 /* DetailsViewModel.swift in Sources */,
+				F308989F2E390EFA00836434 /* HomeView.swift in Sources */,
+				F38F71B52E3A669D00AD39BA /* LaunchView.swift in Sources */,
+				F34A0C082E3B67E90098584B /* ContentView.swift in Sources */,
+				F30898A02E390EFA00836434 /* JoiefullApp.swift in Sources */,
+				F30898AE2E39156800836434 /* JoiefullRepository.swift in Sources */,
+				F34A0C0C2E3BC3A80098584B /* FullscreenImageView.swift in Sources */,
+				F3789E332E4226BF00B682D6 /* FavoriteVM.swift in Sources */,
+				F33AA0332E3CEA8300E68245 /* ShareSheet.swift in Sources */,
+				F30898AA2E39141400836434 /* Product.swift in Sources */,
+				F3789E312E420D7300B682D6 /* RatingsVM.swift in Sources */,
+				F30898A72E39124500836434 /* APIService.swift in Sources */,
+				F38F71B82E3A6A8F00AD39BA /* DetailsView.swift in Sources */,
+				F30898F52E3923C100836434 /* APIError.swift in Sources */,
+				F30898A32E390F7700836434 /* Constants.swift in Sources */,
+				F308993A2E3925F100836434 /* CategoryRow.swift in Sources */,
+				F308993C2E3928ED00836434 /* CategoryItem.swift in Sources */,
+				F34A0C0A2E3B969A0098584B /* AsyncImageView.swift in Sources */,
+				F3789E2D2E41FED000B682D6 /* RatingsMock.swift in Sources */,
+				F30898B22E391F5000836434 /* HomeViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3789E652E42324400B682D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F3789E6E2E42324400B682D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F308982E2E39083A00836434 /* Joiefull */;
+			targetProxy = F3789E6D2E42324400B682D6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		F30898382E39083B00836434 /* Debug */ = {
@@ -298,6 +511,40 @@
 			};
 			name = Release;
 		};
+		F3789E6F2E42324400B682D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bougaranhelena.JoiefullTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Joiefull.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Joiefull";
+			};
+			name = Debug;
+		};
+		F3789E702E42324400B682D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bougaranhelena.JoiefullTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Joiefull.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Joiefull";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -315,6 +562,15 @@
 			buildConfigurations = (
 				F308983B2E39083B00836434 /* Debug */,
 				F308983C2E39083B00836434 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3789E712E42324400B682D6 /* Build configuration list for PBXNativeTarget "JoiefullTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3789E6F2E42324400B682D6 /* Debug */,
+				F3789E702E42324400B682D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
