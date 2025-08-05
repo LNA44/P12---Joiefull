@@ -12,13 +12,14 @@ struct DetailsView: View {
 	@Environment(\.dismiss) private var dismiss  // Pour fermer la vue
 	@StateObject var viewModel: DetailsViewModel
 	@EnvironmentObject var ratingsVM: RatingsViewModel
+	@EnvironmentObject var favoriteVM: FavoriteViewModel
 	@State private var isImageFullscreen = false
 	@State private var userRating: Double = 0 //State lance un rafraichissement de l'interface
 	@State private var userComment: String = "" //modifie la vue à chaque nouvelle lettre tapée
 	@State private var showShareSheet = false
 	@State private var sharingComment: String = ""
-	@State private var isUserFavorite: Bool = false
-	@State private var localFavorites: Int
+	//@State private var isUserFavorite: Bool = false
+	//@State private var localFavorites: Int
 	
 	@State private var imageSize: CGSize = .zero
 	
@@ -26,8 +27,6 @@ struct DetailsView: View {
 	init(product: Product) {
 		_viewModel = StateObject(wrappedValue: DetailsViewModel())
 		self.product = product
-		//self._note = note
-		_localFavorites = State(initialValue: product.likes)
 	}
 	
 	var body: some View {
@@ -56,23 +55,18 @@ struct DetailsView: View {
 							
 								.overlay(alignment: .bottomTrailing) {
 									Button (action: {
-										if isUserFavorite {
-											localFavorites -= 1
-										} else {
-											localFavorites += 1
-										}
-										isUserFavorite.toggle()
+										favoriteVM.toggleFavorite(for: product.id)
 									}) {
 										RoundedRectangle(cornerRadius: 20)
 											.fill(Color.white)
 											.frame(width:CGFloat(89), height:CGFloat(45))
 											.overlay(
 												HStack(spacing: 5) {
-													Image(systemName: isUserFavorite ? "heart.fill" : "heart")
+													Image(systemName: favoriteVM.isFavorite(product.id) ? "heart.fill" : "heart")
 														.frame(width: 22)
 														.foregroundColor(.black)
 													
-													Text("\(localFavorites)")
+													Text("\(favoriteVM.likesCount(for: product.id))")
 														.font(.system(size: 21, weight: .semibold))
 														.foregroundColor(.black)
 												}
@@ -169,6 +163,25 @@ struct DetailsView: View {
 				}
 				.padding(.horizontal, 20)
 				.padding(.top, 15)
+				
+				HStack {
+					RoundedRectangle(cornerRadius: 20)
+						.fill(Color.white)
+						.frame(width:CGFloat(89), height:CGFloat(45))
+						.overlay(
+							HStack(spacing: 5) {
+								Image(systemName: "heart")
+									.frame(width: 22)
+									.foregroundColor(.black)
+								
+								Text("\(favoriteVM.userLikesCount())")
+									.font(.system(size: 21, weight: .semibold))
+									.foregroundColor(.black)
+							}
+						)
+					Spacer()
+				}
+				.padding(.leading, 20)
 			}
 			.sheet(isPresented: $isImageFullscreen) {
 				FullscreenImageView(imageURL: product.picture.imageURL)
@@ -187,6 +200,9 @@ struct DetailsView: View {
 					}
 				}
 			}
+		}
+		.onAppear {
+			favoriteVM.setInitialLikes(for: product.id, count: product.likes) //nombre de likes au départ = ceux reçu par l'API
 		}
 	}
 }

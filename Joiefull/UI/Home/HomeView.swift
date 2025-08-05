@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
 	@StateObject var viewModel: HomeViewModel
 	@StateObject var ratingsVM = RatingsViewModel()
+	@StateObject var favoriteVM = FavoriteViewModel()
 	
 	init() {
 		let repository = JoiefullRepository()
@@ -38,6 +39,7 @@ struct HomeView: View {
 			}
 		}
 		.environmentObject(ratingsVM)
+		.environmentObject(favoriteVM)
 		.onAppear {
 			Task {
 				await viewModel.fetchProducts()

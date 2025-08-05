@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CategoryItem: View {
 	@EnvironmentObject var ratingsVM: RatingsViewModel
+	@EnvironmentObject var favoriteVM: FavoriteViewModel
+
 	var product: Product
 
 	var body: some View {
@@ -29,11 +31,11 @@ struct CategoryItem: View {
 							.offset(x: 80, y: 75)
 
 						HStack(spacing: 5) {
-							Image(systemName: "heart")
+							Image(systemName: favoriteVM.isFavorite(product.id) ? "heart.fill" : "heart")
 								.frame(width: CGFloat(14))
 								.foregroundColor(.black)
 							
-							Text("\(product.likes)")
+							Text("\(favoriteVM.likesCount(for: product.id))")
 								.font(.system(size: CGFloat(14), weight: .semibold, design: .default))
 								.foregroundColor(.black)
 						}
@@ -82,6 +84,12 @@ struct CategoryItem: View {
 			}
 			.frame(maxWidth: 182)
 			.frame(height: 65)
+		}
+		.onAppear {
+			// Initialiser les likes
+			if favoriteVM.likesCount(for: product.id) == 0 {
+				favoriteVM.setInitialLikes(for: product.id, count: product.likes)
+			}
 		}
 		.padding(.leading, 15)
 		.padding(.trailing, -5)

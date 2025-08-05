@@ -12,6 +12,7 @@ struct CategoryRow: View {
 	var items: [Product] = []
 	@AccessibilityFocusState private var isFocused: Bool
 	@EnvironmentObject var ratingsVM: RatingsViewModel
+	@EnvironmentObject var favoriteVM: FavoriteViewModel
 	
 	init(categoryName: String = "", items: [Product] = []) {
 		self.categoryName = categoryName
@@ -30,7 +31,9 @@ struct CategoryRow: View {
 				HStack (alignment: .top, spacing: 0){
 					ForEach(items) { product in
 						NavigationLink(destination: DetailsView(product: product)
-							.environmentObject(ratingsVM)) {
+							.environmentObject(ratingsVM)
+							.environmentObject(favoriteVM)
+						) {
 							CategoryItem(product: product)
 									
 						}
