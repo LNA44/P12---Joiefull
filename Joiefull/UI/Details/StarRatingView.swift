@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StarRatingView: View {
-	@Binding var rating: Int
+	@Binding var rating: Double
 	var maximumRating = 5
 	var starSize: CGFloat = 30
 	var onColor = Color.orange
@@ -17,19 +17,19 @@ struct StarRatingView: View {
 	var body: some View {
 		HStack(spacing: 8) {
 			ForEach(1...maximumRating, id: \.self) { number in
-				Image(systemName: number <= rating ? "star.fill" : "star")
+				Image(systemName: number <= Int(rating) ? "star.fill" : "star")
 					.resizable()
 					.frame(width: starSize, height: starSize)
-					.foregroundColor(number <= rating ? onColor : offColor)
+					.foregroundColor(number <= Int(rating) ? onColor : offColor)
 					.onTapGesture {
-						rating = number
+						rating = Double(number)
 					}
 			}
 		}
 	}
 }
 
-struct StarRatingView_Previews: PreviewProvider {
+/*struct StarRatingView_Previews: PreviewProvider {
 	@State static var rating = 3  // valeur de départ pour tester
 	
 	static var previews: some View {
@@ -38,4 +38,4 @@ struct StarRatingView_Previews: PreviewProvider {
 			.previewLayout(.sizeThatFits) // pour que la preview s'adapte à la taille
 			.padding()
 	}
-}
+}*/

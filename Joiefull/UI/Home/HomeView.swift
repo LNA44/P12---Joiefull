@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
 	@StateObject var viewModel: HomeViewModel
+	@StateObject var ratingsVM = RatingsViewModel()
 	
 	init() {
 		let repository = JoiefullRepository()
@@ -16,10 +17,11 @@ struct HomeView: View {
 	}
 	
 	var body: some View {
-		NavigationView {
+		NavigationStack {
 			List {
 				ForEach(viewModel.categories.keys.sorted(), id: \.self) { key in
 					CategoryRow(categoryName: key, items: viewModel.categories[key] ?? [])
+						
 						.padding(.bottom, -10)
 						.padding(.top, -20)
 				}
@@ -35,6 +37,7 @@ struct HomeView: View {
 				}
 			}
 		}
+		.environmentObject(ratingsVM)
 		.onAppear {
 			Task {
 				await viewModel.fetchProducts()

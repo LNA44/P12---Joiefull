@@ -11,14 +11,12 @@ struct DetailsView: View {
 	var product: Product
 	@Environment(\.dismiss) private var dismiss  // Pour fermer la vue
 	@StateObject var viewModel: DetailsViewModel
+	@EnvironmentObject var ratingsVM: RatingsViewModel
 	@State private var isImageFullscreen = false
-	@State private var userRating: Int = 0 //State lance un rafraichissement de l'interface
+	@State private var userRating: Double = 0 //State lance un rafraichissement de l'interface
 	@State private var userComment: String = "" //modifie la vue à chaque nouvelle lettre tapée
 	@State private var showShareSheet = false
 	@State private var sharingComment: String = ""
-	private var ratingAverage: Double {
-		viewModel.averageRating(productId: product.id)
-	}
 	@State private var isUserFavorite: Bool = false
 	@State private var localFavorites: Int
 	
@@ -28,6 +26,7 @@ struct DetailsView: View {
 	init(product: Product) {
 		_viewModel = StateObject(wrappedValue: DetailsViewModel())
 		self.product = product
+		//self._note = note
 		_localFavorites = State(initialValue: product.likes)
 	}
 	
@@ -112,12 +111,11 @@ struct DetailsView: View {
 							Image(systemName: "star.fill")
 								.foregroundColor(.orange)
 								.font(.system(size: 23))
-							Text(String(format: "%.1f", ratingAverage))
-								.font(.system(size: 22))
+							Text(String(format: "%.1f", ratingsVM.getAverage(for: product.id)))
 						}
 					}
 					.accessibilityElement()
-					.accessibilityLabel("\(product.name) noté \(ratingAverage) étoiles")
+					.accessibilityLabel("\(product.name) noté \(ratingsVM.getAverage(for: product.id)) étoiles")
 					
 				}
 				.padding(.top, 20)
@@ -150,13 +148,11 @@ struct DetailsView: View {
 					Image("Mask group")
 						.accessibilityLabel("Image de profil utilisateur")
 					StarRatingView(rating: $userRating)
+						.onChange(of: userRating) { newValue in
+							ratingsVM.addRating(rating: newValue, for: product.id)
+						}
 						.padding(.bottom, 5)
 						.accessibilityLabel("Note de l'utilisateur de 1 à 5 étoiles")
-						.onChange(of: userRating) { newValue in
-							if newValue > 0 {
-								viewModel.addRating(productId: product.id, rating: newValue)
-							}
-						}
 					Spacer()
 				}
 				.padding(.horizontal, 20)

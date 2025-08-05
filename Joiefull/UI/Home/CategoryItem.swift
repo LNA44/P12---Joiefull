@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct CategoryItem: View {
+	@EnvironmentObject var ratingsVM: RatingsViewModel
 	var product: Product
-	
+
 	var body: some View {
 		VStack() {
 			ZStack {
@@ -58,12 +59,11 @@ struct CategoryItem: View {
 						Image(systemName: "star.fill")
 							.foregroundColor(.orange)
 							.font(.system(size: 12))
-						Text("10")
+						Text(String(format: "%.1f", ratingsVM.getAverage(for: product.id)))
 							.font(.system(size: 14))
 					}
 					.accessibilityElement()
-					.accessibilityLabel("10 personnes l'ont ajouté en favoris")
-					//.accessibilityLabel("\(nombreFavoris) personnes l'ont ajouté en favoris")
+					.accessibilityLabel("Ce produit a reçu une note moyenne de \(String(format: "%.1f", ratingsVM.getAverage(for: product.id))) sur 5 étoiles")
 				}
 				
 				HStack {
@@ -88,7 +88,7 @@ struct CategoryItem: View {
 	}
 }
 
-#Preview {
+/*#Preview {
 	let product = Product(id: 32, picture: Product.Picture(url: "https://raw.githubusercontent.com/LNA44/P12---Creez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/accessories/1.jpg", description: ""), name: "test", likes: 10, price: 100, originalPrice: 110, category: .bottoms)
 	CategoryItem(product: product)
-}
+}*/
