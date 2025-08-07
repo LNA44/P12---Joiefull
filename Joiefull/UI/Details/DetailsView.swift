@@ -56,7 +56,6 @@ struct DetailsView: View {
 										}) {
 											RoundedRectangle(cornerRadius: 20)
 												.fill(Color.white)
-											//.frame(width:CGFloat(89), height:CGFloat(45))
 												.frame(
 													width: horizontalSizeClass == .compact ? 78 : 89,  // 89 pour iPhone, 150 pour iPad ou autres
 													height: horizontalSizeClass == .compact ? 35 : 45  // idem
@@ -78,6 +77,8 @@ struct DetailsView: View {
 										}
 										.padding(.trailing, imageWidth * 0.05)
 										.padding(.bottom, imageHeight * 0.04)
+										.accessibilityElement()
+										.accessibilityAddTraits(.isButton)
 										.accessibilityLabel("Le produit a été aimé par \(product.likes) d'utilisateurs")
 									}
 									.overlay(alignment: .topTrailing) {
@@ -89,6 +90,7 @@ struct DetailsView: View {
 										.padding(.top, imageWidth * 0.05)
 										.padding(.trailing, imageHeight * 0.06)
 										.accessibilityLabel("Partager ce produit")
+										.accessibilityAddTraits(.isButton)
 										.accessibilityHint("Ouvre les options de partage")
 										.sheet(isPresented: $showShareSheet) {
 											ShareSheet(comment: sharingComment, productDescription: product.picture.description, isPresented: $showShareSheet)
@@ -103,7 +105,6 @@ struct DetailsView: View {
 						HStack {
 							Text("\(product.name)")
 								.font(.system(size: 22, weight: .semibold, design: .default))
-								.accessibilityHidden(true)
 							Spacer()
 							HStack(spacing: 2) {
 								Image(systemName: "star.fill")
@@ -142,6 +143,7 @@ struct DetailsView: View {
 							.fixedSize(horizontal: false, vertical: true) // permet au texte de s'étendre verticalement
 							.frame(maxWidth: .infinity, alignment: .leading)
 							.padding(.top, 5)
+							.accessibilityLabel("Description du produit : \(product.picture.description)")
 					}
 					.padding(.horizontal, 20)
 					.padding(.bottom, 20)
@@ -158,7 +160,7 @@ struct DetailsView: View {
 							}
 						))
 						.padding(.bottom, 5)
-						.accessibilityLabel("Note de l'utilisateur de 1 à 5 étoiles")
+						.accessibilityLabel("Note de l'utilisateur de 1 à 5 étoiles: \(ratingsVM.getUserRating(for: product.id))")
 						Spacer()
 					}
 					.padding(.horizontal, 20)
@@ -204,6 +206,8 @@ struct DetailsView: View {
 					}
 					.padding(.leading, 50)
 					.padding(.top, 10)
+					.accessibilityElement()
+					.accessibilityLabel("Vous avez liké \(favoriteVM.userLikeCount()) produits")
 				}
 				.sheet(isPresented: $isImageFullscreen) {
 					FullscreenImageView(imageURL: product.picture.imageURL)

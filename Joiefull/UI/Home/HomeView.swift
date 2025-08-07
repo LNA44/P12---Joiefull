@@ -24,10 +24,14 @@ struct HomeView: View {
 			if horizontalSizeClass == .regular {
 				GeometryReader { geometry in
 					IpadHomeView(viewModel: viewModel, geometry: geometry)
-				}				
+						.accessibilityElement(children: .contain)
+						.accessibilityLabel("Accueil iPad, liste des produits")
+				}
 			} else {
 				// iPhone : navigation vers la vue de détail
 				IphoneHomeView(viewModel: viewModel)
+					.accessibilityElement(children: .contain)
+					.accessibilityLabel("Accueil iPhone, liste des produits")
 			}
 		}
 		.environmentObject(ratingsVM)

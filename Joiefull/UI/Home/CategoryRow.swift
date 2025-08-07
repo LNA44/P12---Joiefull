@@ -9,11 +9,10 @@ import SwiftUI
 
 struct CategoryRow: View {
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
-	var categoryName: String
-	var items: [Product] = []
-	@AccessibilityFocusState private var isFocused: Bool
 	@EnvironmentObject var ratingsVM: RatingsViewModel
 	@EnvironmentObject var favoriteVM: FavoriteViewModel
+	var categoryName: String
+	var items: [Product] = []
 	var selectedProduct: Binding<Product?>? //afficher la vue detail sur ipad sans naviguer (changer d'écran), Optionnel pour n'être utilisé que sur iPad
 	
 	init(categoryName: String = "", items: [Product] = [], selectedProduct: Binding<Product?>? = nil) {
@@ -27,6 +26,7 @@ struct CategoryRow: View {
 			HStack {
 				Text(categoryName)
 					.font(.system(size: 22, weight: .semibold, design: .default))
+					.accessibilityAddTraits(.isHeader)
 				Spacer()
 			}
 			.padding(.top, horizontalSizeClass == .compact ? 10 : 0)
@@ -35,6 +35,7 @@ struct CategoryRow: View {
 					ForEach(items) { product in
 						productView(for: product)
 					}
+					.accessibilityAddTraits(.isButton)
 				}
 			}
 			.frame(height: horizontalSizeClass == .compact ? 300 : 330) //hauteur du rose

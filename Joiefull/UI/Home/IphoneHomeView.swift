@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct IphoneHomeView: View {
-	@ObservedObject var viewModel: HomeViewModel
+	@ObservedObject var viewModel: HomeViewModel //recoit le VM du parent
 
     var body: some View {
 		List {

@@ -12,7 +12,6 @@ struct CategoryItem: View {
 	@EnvironmentObject var favoriteVM: FavoriteViewModel
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
 	var isSelected = false
-	
 	var product: Product
 	
 	var body: some View {
@@ -26,8 +25,8 @@ struct CategoryItem: View {
 							RoundedRectangle(cornerRadius: 16)
 								.stroke(isSelected ? (Color("SelectedItem")) : Color.clear, lineWidth: 4)
 						)
-						.accessibilityElement()
 						.accessibilityLabel("\(product.picture.description)")
+						.accessibilityAddTraits(.isImage)
 				}
 				
 				ZStack {
@@ -50,7 +49,6 @@ struct CategoryItem: View {
 						.offset(x: horizontalSizeClass == .compact ? 28 : 39,  y: horizontalSizeClass == .compact ? 75 : 95)
 					}
 				}
-				.accessibilityElement()
 				.accessibilityLabel("Le produit a été aimé par \(product.likes) d'utilisateurs")
 			}
 			//.background(Color.orange)
@@ -68,7 +66,7 @@ struct CategoryItem: View {
 							.multilineTextAlignment(.leading)
 							.lineLimit(nil)       // aucune limite de lignes
 							.fixedSize(horizontal: false, vertical: true)
-							.accessibilityHidden(true)
+							.accessibilityLabel("Le nom de cet article est \(product.name)")
 					}
 					Spacer()
 					HStack(spacing: 2) {
@@ -105,7 +103,7 @@ struct CategoryItem: View {
 						.foregroundColor(Color.black.opacity(0.8))
 				}
 				//.background(Color.yellow)
-				.accessibilityElement()
+				.accessibilityElement() //avec plsrs éléments, permet de les regrouper en une description
 				.accessibilityLabel("Prix réduit : \(Int(product.price)) euros; prix d'origine : \(Int(product.originalPrice)) euros, barré.")
 			}
 			//.background(Color.brown)

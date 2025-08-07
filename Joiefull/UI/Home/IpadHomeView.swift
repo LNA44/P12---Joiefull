@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct IpadHomeView: View {
-	@ObservedObject var viewModel: HomeViewModel
+	@ObservedObject var viewModel: HomeViewModel //recoit le VM du parent
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
 	var geometry: GeometryProxy
 	@State private var selectedProduct: Product? = nil
@@ -25,7 +25,6 @@ struct IpadHomeView: View {
 					}
 					.frame(height: 390)
 					//.background(Color.mint)
-					//.listRowBackground(Color(.systemGray6))
 					.listRowSeparator(.hidden)
 					.listRowInsets(EdgeInsets())
 				}
