@@ -8,40 +8,64 @@
 import SwiftUI
 
 struct CategoryRow: View {
+	@Environment(\.horizontalSizeClass) var horizontalSizeClass
 	var categoryName: String
 	var items: [Product] = []
 	@AccessibilityFocusState private var isFocused: Bool
 	@EnvironmentObject var ratingsVM: RatingsViewModel
 	@EnvironmentObject var favoriteVM: FavoriteViewModel
+	var selectedProduct: Binding<Product?>? //afficher la vue detail sur ipad sans naviguer (changer d'écran), Optionnel pour n'être utilisé que sur iPad
 	
-	init(categoryName: String = "", items: [Product] = []) {
+	init(categoryName: String = "", items: [Product] = [], selectedProduct: Binding<Product?>? = nil) {
 		self.categoryName = categoryName
 		self.items = items
+		self.selectedProduct = selectedProduct
 	}
 	
     var body: some View {
-			VStack {
+		VStack {
+			HStack {
 				Text(categoryName)
 					.font(.system(size: 22, weight: .semibold, design: .default))
-					.padding(.leading, 15)
-					.padding(.top, 5)
-					.accessibilitySortPriority(1)
+				Spacer()
 			}
+			.padding(.top, horizontalSizeClass == .compact ? 10 : 0)
 			ScrollView(.horizontal, showsIndicators: false) {
-				HStack (alignment: .top, spacing: 0){
+				HStack(spacing: 10) {
 					ForEach(items) { product in
-						NavigationLink(destination: DetailsView(product: product)
-							.environmentObject(ratingsVM)
-							.environmentObject(favoriteVM)
-						) {
-							CategoryItem(product: product)
-									
-						}
-						.buttonStyle(PlainButtonStyle())
+						productView(for: product)
 					}
 				}
 			}
-			.frame(height: 310)
+			.frame(height: horizontalSizeClass == .compact ? 300 : 330) //hauteur du rose
+		}
+		.padding(.leading, 15)
+	}
+	
+	@ViewBuilder
+	private func productView(for product: Product) -> some View {
+		if horizontalSizeClass == .compact {
+			//iPhone: navigation
+			NavigationLink(destination: DetailsView(product: product)
+				.background(Color("Background"))
+				.environmentObject(ratingsVM)
+				.environmentObject(favoriteVM)
+			) {
+				CategoryItem(product: product)
+					.frame(maxHeight: .infinity, alignment: .top)
+				
+			}
+			.buttonStyle(PlainButtonStyle())
+		} else {
+			//Ipad: pas de nav juste afficher DetailsView
+			Button {
+				selectedProduct?.wrappedValue = product
+			} label: {
+				CategoryItem(isSelected: selectedProduct?.wrappedValue == product, product: product)
+			}
+			.buttonStyle(PlainButtonStyle())
+		}
+		
 	}
 }
 

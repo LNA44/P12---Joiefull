@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AsyncImageView: View {
 	let url: URL
-	var width: CGFloat = 198
-	var height: CGFloat = 198
+	var width: CGFloat
+	var height: CGFloat
 	
 	var body: some View {
 		AsyncImage(url: url) { phase in
@@ -33,6 +33,6 @@ struct AsyncImageView: View {
 	}
 }
 
-#Preview {
+/*#Preview {
 	AsyncImageView(url: URL(string: "https://raw.githubusercontent.com/LNA44/P12---Creez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/accessories/1.jpg")!)
-}
+}*/

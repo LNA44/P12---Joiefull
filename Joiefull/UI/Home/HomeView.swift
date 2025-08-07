@@ -11,6 +11,7 @@ struct HomeView: View {
 	@StateObject var viewModel: HomeViewModel
 	@StateObject var ratingsVM = RatingsViewModel()
 	@StateObject var favoriteVM = FavoriteViewModel()
+	@Environment(\.horizontalSizeClass) var horizontalSizeClass
 	
 	init() {
 		let repository = JoiefullRepository()
@@ -19,23 +20,14 @@ struct HomeView: View {
 	
 	var body: some View {
 		NavigationStack {
-			List {
-				ForEach(viewModel.categories.keys.sorted(), id: \.self) { key in
-					CategoryRow(categoryName: key, items: viewModel.categories[key] ?? [])
-						
-						.padding(.bottom, -10)
-						.padding(.top, -20)
-				}
-				.listRowSeparator(.hidden)
-				.listRowInsets(EdgeInsets())
-			}
-			.padding(.top, -45)
-			.padding(.top, UIDevice.current.userInterfaceIdiom == .pad ? 50 : 0)
-			.scrollContentBackground(.hidden)
-			.onAppear {
-				Task {
-					await viewModel.fetchProducts()
-				}
+			// iPad : Split View
+			if horizontalSizeClass == .regular {
+				GeometryReader { geometry in
+					IpadHomeView(viewModel: viewModel, geometry: geometry)
+				}				
+			} else {
+				// iPhone : navigation vers la vue de détail
+				IphoneHomeView(viewModel: viewModel)
 			}
 		}
 		.environmentObject(ratingsVM)

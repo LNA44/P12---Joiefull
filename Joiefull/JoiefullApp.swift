@@ -24,7 +24,7 @@ struct JoiefullApp: App {
 						}
 					}
 			} else {
-				ContentView()
+				HomeView()
 			}
 		}
 	}

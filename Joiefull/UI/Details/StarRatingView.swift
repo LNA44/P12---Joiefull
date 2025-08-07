@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StarRatingView: View {
-	@Binding var rating: Double
+	@Binding var rating: Double //lié au get/set de detailsView, permet d'envoyer ou de récupérer de sdonnées du VM
 	var maximumRating = 5
 	var starSize: CGFloat = 30
 	var onColor = Color.orange

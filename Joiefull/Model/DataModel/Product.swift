@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Product: Decodable, Identifiable {
+struct Product: Decodable, Identifiable, Equatable {
 	var id: Int
 	var picture: Picture
 	var name: String
@@ -46,5 +46,23 @@ struct Product: Decodable, Identifiable {
 extension Product.Picture {
 	var imageURL: URL? {
 		URL(string: url)
+	}
+}
+
+extension Product { //permet de rendre Product conforme à Equatable pour comparer deux produits (utile dans CategoryRow pour vérifier si le produit a été sélectionné). Swift ne sait pas comparer les propriétés calculées + sous structures
+	static func == (lhs: Product, rhs: Product) -> Bool {
+		return lhs.id == rhs.id &&
+			   lhs.name == rhs.name &&
+			   lhs.likes == rhs.likes &&
+			   lhs.price == rhs.price &&
+			   lhs.originalPrice == rhs.originalPrice &&
+			   lhs.category == rhs.category &&
+			   lhs.picture == rhs.picture
+	}
+}
+
+extension Product.Picture: Equatable { //idem
+	static func == (lhs: Product.Picture, rhs: Product.Picture) -> Bool {
+		return lhs.url == rhs.url && lhs.description == rhs.description
 	}
 }
