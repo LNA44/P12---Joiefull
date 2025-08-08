@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct AsyncImageView: View {
+	//MARK: -Public properties
 	let url: URL
 	var width: CGFloat
 	var height: CGFloat
 	
+	//MARK: -Body
 	var body: some View {
 		AsyncImage(url: url) { phase in
 			switch phase {

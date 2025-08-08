@@ -8,7 +8,7 @@
 import Foundation
 
 class RatingsViewModel: ObservableObject {
-	//MARK: -Properties
+	//MARK: -Public roperties
 	@Published var allRatings: [Int: [Double]]
 	@Published var userRatings: [Int: Double] = [:] //note utilisateur par produit
 	
@@ -17,6 +17,7 @@ class RatingsViewModel: ObservableObject {
 		self.allRatings = ratingsMock
 	}
 	
+	//MARK: -Methods
 	func addRating(rating: Double, for productId: Int) {
 		if userRatings[productId] == nil { //empecher l'utilisateur de revoter
 			allRatings[productId, default: []].append(rating) //ajout note au tableau du produit

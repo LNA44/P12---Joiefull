@@ -8,12 +8,9 @@
 import Foundation
 
 class FavoriteViewModel: ObservableObject {
-	//MARK: -Properties
+	//MARK: -Public properties
 	@Published var totalLikes: [Int: Int] = [:]
 	@Published var userFavorites: Set<Int> = []
-	
-	//MARK: -Initialization
-	init() {}
 	
 	//MARK: -Methods
 	func toggleFavorite(for productId: Int) {

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CategoryRow: View {
+	//MARK: -Public properties
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
 	@EnvironmentObject var ratingsVM: RatingsViewModel
 	@EnvironmentObject var favoriteVM: FavoriteViewModel
@@ -15,12 +16,14 @@ struct CategoryRow: View {
 	var items: [Product] = []
 	var selectedProduct: Binding<Product?>? //afficher la vue detail sur ipad sans naviguer (changer d'écran), Optionnel pour n'être utilisé que sur iPad
 	
+	//MARK: -Initialization
 	init(categoryName: String = "", items: [Product] = [], selectedProduct: Binding<Product?>? = nil) {
 		self.categoryName = categoryName
 		self.items = items
 		self.selectedProduct = selectedProduct
 	}
 	
+	//MARK: -Body
     var body: some View {
 		VStack {
 			HStack {
@@ -34,8 +37,10 @@ struct CategoryRow: View {
 				HStack(spacing: 10) {
 					ForEach(items) { product in
 						productView(for: product)
+							.accessibilityElement(children: .ignore)
+							.accessibilityLabel("Produit \(product.name), note moyenne\(String(format: "%.1f", ratingsVM.getAverage(for: product.id))) sur 5 étoiles, prix réduit \(String(format: "%.0f", product.price)) euros, prix d'origine \(String(format: "%.0f", product.originalPrice)) euros. Le produit a été aimé par \(product.likes) d'utilisateurs.")
 					}
-					.accessibilityAddTraits(.isButton)
+					
 				}
 			}
 			.frame(height: horizontalSizeClass == .compact ? 300 : 330) //hauteur du rose
@@ -48,7 +53,7 @@ struct CategoryRow: View {
 		if horizontalSizeClass == .compact {
 			//iPhone: navigation
 			NavigationLink(destination: DetailsView(product: product)
-				.background(Color("Background"))
+				//.background(Color("Background"))
 				.environmentObject(ratingsVM)
 				.environmentObject(favoriteVM)
 			) {
@@ -63,6 +68,8 @@ struct CategoryRow: View {
 				selectedProduct?.wrappedValue = product
 			} label: {
 				CategoryItem(isSelected: selectedProduct?.wrappedValue == product, product: product)
+					.environmentObject(ratingsVM)
+					.environmentObject(favoriteVM)
 			}
 			.buttonStyle(PlainButtonStyle())
 		}

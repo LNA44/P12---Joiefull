@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct IphoneHomeView: View {
+	//MARK: -Public properties
 	@ObservedObject var viewModel: HomeViewModel //recoit le VM du parent
 
+	//MARK: -Body
     var body: some View {
 		List {
 			ForEach(viewModel.categories.keys.sorted(), id: \.self) { key in

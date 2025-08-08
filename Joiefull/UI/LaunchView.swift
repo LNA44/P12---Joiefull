@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct LaunchView: View {
+	//MARK: -Public properties
 	@State private var isActive = false
 	
+	//MARK: -Body
 	var body: some View {
 		if isActive {
 			HomeView()
@@ -21,12 +23,15 @@ struct LaunchView: View {
 					.resizable()
 					.scaledToFit()
 					.frame(width: 150, height: 150)
+					.accessibilityHidden(true)
 				
 				Spacer()
 				
 				ProgressView()
 					.progressViewStyle(CircularProgressViewStyle())
 					.padding(.bottom, 40)
+					.accessibilityLabel("Chargement en cours")
+				
 			}
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.background(Color("MainColor"))

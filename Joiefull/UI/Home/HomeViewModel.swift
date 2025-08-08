@@ -8,7 +8,7 @@
 import Foundation
 
 class HomeViewModel: ObservableObject {
-	//MARK: -Properties
+	//MARK: -Public properties
 	private let repository: JoiefullRepository
 	@Published var products: [Product] = []
 	var categories: [String: [Product]] {

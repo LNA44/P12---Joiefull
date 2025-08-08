@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct StarRatingView: View {
+	//MARK: -Public properties
 	@Binding var rating: Double //lié au get/set de detailsView, permet d'envoyer ou de récupérer de sdonnées du VM
 	var maximumRating = 5
 	var starSize: CGFloat = 30
 	var onColor = Color.orange
 	var offColor = Color.gray
 	
+	//MARK: -Body
 	var body: some View {
 		HStack(spacing: 8) {
 			ForEach(1...maximumRating, id: \.self) { number in

@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct IpadHomeView: View {
+	//MARK: -Public properties
 	@ObservedObject var viewModel: HomeViewModel //recoit le VM du parent
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
 	var geometry: GeometryProxy
+	
+	//MARK: -Private properties
 	@State private var selectedProduct: Product? = nil
 	
     var body: some View {

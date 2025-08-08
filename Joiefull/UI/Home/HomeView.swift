@@ -8,29 +8,33 @@
 import SwiftUI
 
 struct HomeView: View {
+	//MARK: -Public properties
 	@StateObject var viewModel: HomeViewModel
 	@StateObject var ratingsVM = RatingsViewModel()
 	@StateObject var favoriteVM = FavoriteViewModel()
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
+	@AccessibilityFocusState private var isFocused: Bool
 	
+	//MARK: -Initialization
 	init() {
 		let repository = JoiefullRepository()
 		_viewModel = StateObject(wrappedValue: HomeViewModel(repository: repository))
 	}
 	
+	//MARK: -Body
 	var body: some View {
 		NavigationStack {
 			// iPad : Split View
 			if horizontalSizeClass == .regular {
 				GeometryReader { geometry in
 					IpadHomeView(viewModel: viewModel, geometry: geometry)
-						.accessibilityElement(children: .contain)
+						.accessibilityFocused($isFocused)
 						.accessibilityLabel("Accueil iPad, liste des produits")
 				}
 			} else {
 				// iPhone : navigation vers la vue de détail
 				IphoneHomeView(viewModel: viewModel)
-					.accessibilityElement(children: .contain)
+					.accessibilityFocused($isFocused)
 					.accessibilityLabel("Accueil iPhone, liste des produits")
 			}
 		}
