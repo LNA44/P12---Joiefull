@@ -16,9 +16,13 @@ struct HomeView: View {
 	@AccessibilityFocusState private var isFocused: Bool
 	
 	//MARK: -Initialization
-	init() {
-		let repository = JoiefullRepository()
-		_viewModel = StateObject(wrappedValue: HomeViewModel(repository: repository))
+	init(viewModel: HomeViewModel? = nil) {
+		if let viewModel {
+			_viewModel = StateObject(wrappedValue: viewModel)
+		} else {
+			let repository = JoiefullRepository()
+			_viewModel = StateObject(wrappedValue: HomeViewModel(repository: repository))
+		}
 	}
 	
 	//MARK: -Body
@@ -40,6 +44,9 @@ struct HomeView: View {
 		}
 		.environmentObject(ratingsVM)
 		.environmentObject(favoriteVM)
+		.alert(isPresented: $viewModel.showAlert) {
+			Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? ""), dismissButton: .default(Text("OK")))
+		}
 		.onAppear {
 			Task {
 				await viewModel.fetchProducts()
@@ -48,11 +55,18 @@ struct HomeView: View {
 	}
 }
 
-//créer mock
-/*struct HomeView_Preview: PreviewProvider {
- static var previews: some View {
- let repository = JoiefullRepository()
- let vm = HomeViewModel(repository: repository)
- return HomeView(viewModel: vm)
+//MARK: -Preview
+struct HomeView_Previews: PreviewProvider {
+	
+	static var previews: some View {
+		Group {
+			// iPhone
+			HomeView(viewModel: HomeViewModel(repository: MockJoiefullRepository()))
+				.previewDisplayName("iPhone")
+			
+			// iPad
+			HomeView(viewModel: HomeViewModel(repository: MockJoiefullRepository()))
+				.previewDisplayName("iPad")
+		}
 	}
-}*/
+}

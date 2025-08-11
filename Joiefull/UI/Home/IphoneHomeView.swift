@@ -10,9 +10,9 @@ import SwiftUI
 struct IphoneHomeView: View {
 	//MARK: -Public properties
 	@ObservedObject var viewModel: HomeViewModel //recoit le VM du parent
-
+	
 	//MARK: -Body
-    var body: some View {
+	var body: some View {
 		List {
 			ForEach(viewModel.categories.keys.sorted(), id: \.self) { key in
 				CategoryRow(categoryName: key, items: viewModel.categories[key] ?? [])
@@ -31,9 +31,19 @@ struct IphoneHomeView: View {
 				await viewModel.fetchProducts()
 			}
 		}
-    }
+	}
 }
 
-#Preview {
-	IphoneHomeView(viewModel: HomeViewModel(repository: JoiefullRepository()))
+//MARK: -Preview
+struct IphoneHomeView_Previews: PreviewProvider {
+	static var previews: some View {
+		GeometryReader { geometry in
+			let mockRepository = MockJoiefullRepository()
+			let mockViewModel = HomeViewModel(repository: mockRepository)
+			
+			IphoneHomeView(viewModel: mockViewModel)
+				.environmentObject(RatingsViewModel())
+				.environmentObject(FavoriteViewModel())
+		}
+	}
 }

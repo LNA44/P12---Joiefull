@@ -19,7 +19,7 @@ struct CategoryItem: View {
 	private var imageWidth: CGFloat {
 		horizontalSizeClass == .compact ? 198 : 221
 	}
-
+	
 	private var imageHeight: CGFloat {
 		horizontalSizeClass == .compact ? 198 : 254
 	}
@@ -43,7 +43,7 @@ struct CategoryItem: View {
 				favoriteVM.setInitialLikes(for: product.id, count: product.likes)
 			}
 		}
-		.frame(height: horizontalSizeClass == .compact ? 260 : 330)//hauteur du gris
+		.frame(height: horizontalSizeClass == .compact ? 260 : 330)
 	}
 	
 	//MARK: -Sections
@@ -55,8 +55,6 @@ struct CategoryItem: View {
 						RoundedRectangle(cornerRadius: 16)
 							.stroke(isSelected ? (Color("SelectedItem")) : Color.clear, lineWidth: 4)
 					)
-					//.accessibilityLabel("\(product.picture.description)")
-					//.accessibilityAddTraits(.isImage)
 			}
 			favoriteButton
 		}
@@ -85,7 +83,6 @@ struct CategoryItem: View {
 				}
 				.offset(x: horizontalSizeClass == .compact ? 28 : 39,  y: horizontalSizeClass == .compact ? 75 : 95)
 			}
-			//.accessibilityLabel("Le produit a été aimé par \(product.likes) d'utilisateurs")
 		}
 	}
 	
@@ -102,7 +99,6 @@ struct CategoryItem: View {
 					.multilineTextAlignment(.leading)
 					.lineLimit(nil)       // aucune limite de lignes
 					.fixedSize(horizontal: false, vertical: true)
-					//.accessibilityLabel("Le nom de cet article est \(product.name)")
 			}
 			Spacer()
 			HStack(spacing: 2) {
@@ -119,8 +115,6 @@ struct CategoryItem: View {
 					))
 					.accessibilityHidden(true)
 			}
-			//.accessibilityElement()
-			//.accessibilityLabel("Ce produit a reçu une note moyenne de \(String(format: "%.1f", ratingsVM.getAverage(for: product.id))) sur 5 étoiles")
 		}
 	}
 	
@@ -143,12 +137,36 @@ struct CategoryItem: View {
 				.foregroundColor(Color.black.opacity(0.8))
 				.accessibilityHidden(true)
 		}
-		//.accessibilityElement() //avec plsrs éléments, permet de les regrouper en une description
-		//.accessibilityLabel("Prix réduit : \(String(format: "%.0f", product.price)) euros; prix d'origine : \(String(format: "%.0f", product.originalPrice)) euros")
 	}
 }
 
-/*#Preview {
- let product = Product(id: 32, picture: Product.Picture(url: "https://raw.githubusercontent.com/LNA44/P12---Creez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/accessories/1.jpg", description: ""), name: "test", likes: 10, price: 100, originalPrice: 110, category: .bottoms)
- CategoryItem(product: product)
- }*/
+//MARK: -Preview
+struct CategoryItem_Previews: PreviewProvider {
+	static var mockProduct: Product =
+	Product(
+		id: 1,
+		picture: Product.Picture(
+			url: "https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Cr-ez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/bottoms/1.jpg",
+			description: "Modèle femme qui porte un jean et un haut jaune"
+		),
+		name: "Jean pour femme",
+		likes: 24,
+		price: 89.99,
+		originalPrice: 129.99,
+		category: .tops
+	)
+	
+	static var previews: some View {
+		Group {
+			CategoryItem(isSelected: false, product: mockProduct)
+				.environmentObject(RatingsViewModel())
+				.environmentObject(FavoriteViewModel())
+				.previewDevice("iPhone 14")
+			
+			CategoryItem(isSelected: true, product: mockProduct)
+				.environmentObject(RatingsViewModel())
+				.environmentObject(FavoriteViewModel())
+				.previewDevice("iPad Pro (12.9-inch) (6th generation)")
+		}
+	}
+}

@@ -40,6 +40,7 @@ struct FullscreenImageView: View {
 	}
 }
 
+//MARK: -Preview
 #Preview {
 	FullscreenImageView(imageURL: URL(string: "https://raw.githubusercontent.com/LNA44/P12---Creez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/accessories/1.jpg"))
 }

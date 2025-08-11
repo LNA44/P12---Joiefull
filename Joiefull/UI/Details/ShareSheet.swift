@@ -20,7 +20,7 @@ struct ShareSheet: UIViewControllerRepresentable { //création vue en UIKit dans
 		
 		let activityVC = UIActivityViewController(activityItems: [message], applicationActivities: nil)
 		
-		activityVC.completionWithItemsHandler = { _, _, _, _ in //calback après partage de l'utilisateur
+		activityVC.completionWithItemsHandler = { _, _, _, _ in //callback après partage de l'utilisateur
 			isPresented = false
 		}
 		
@@ -31,6 +31,6 @@ struct ShareSheet: UIViewControllerRepresentable { //création vue en UIKit dans
 	}
 	
 	func convertStringToURL(string: String) -> URL? {
-			return URL(string: string)
+		return URL(string: string)
 	}
 }

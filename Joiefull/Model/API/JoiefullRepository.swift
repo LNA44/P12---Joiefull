@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct JoiefullRepository {
-	//MARK: -Properties
+protocol JoiefullRepositoryProtocol {
+	func fetchProducts() async throws -> [Product]
+}
+
+struct JoiefullRepository: JoiefullRepositoryProtocol {
+	//MARK: -Private properties
 	private let APIService: JoiefullAPIService
 	
 	//MARK: -Initialization

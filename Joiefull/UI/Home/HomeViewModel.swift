@@ -9,7 +9,8 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
 	//MARK: -Public properties
-	private let repository: JoiefullRepository
+	@Published var errorMessage: String?
+	@Published var showAlert: Bool = false
 	@Published var products: [Product] = []
 	var categories: [String: [Product]] {
 		Dictionary(grouping: products,
@@ -17,8 +18,11 @@ class HomeViewModel: ObservableObject {
 		)
 	}
 	
+	//MARK: -Private properties
+	private let repository: JoiefullRepositoryProtocol
+	
 	//MARK: -Initialization
-	init(repository: JoiefullRepository) {
+	init(repository: JoiefullRepositoryProtocol) {
 		self.repository = repository
 	}
 	
@@ -29,7 +33,8 @@ class HomeViewModel: ObservableObject {
 			let products = try await repository.fetchProducts()
 			self.products = products
 		} catch {
-			print ("erreur chargement produits VM", error.localizedDescription)
+			errorMessage = "Unknown error happened : \(error.localizedDescription)"
+			showAlert = true
 		}
 	}
 }

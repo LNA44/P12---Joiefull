@@ -35,6 +35,7 @@ struct AsyncImageView: View {
 	}
 }
 
-/*#Preview {
-	AsyncImageView(url: URL(string: "https://raw.githubusercontent.com/LNA44/P12---Creez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/accessories/1.jpg")!)
-}*/
+//MARK: -Preview
+#Preview {
+	AsyncImageView(url: URL(string: "https://raw.githubusercontent.com/LNA44/P12---Creez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/accessories/1.jpg")!, width: CGFloat(215), height: CGFloat( 215))
+}

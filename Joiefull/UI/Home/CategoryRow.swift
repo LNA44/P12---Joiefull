@@ -14,7 +14,7 @@ struct CategoryRow: View {
 	@EnvironmentObject var favoriteVM: FavoriteViewModel
 	var categoryName: String
 	var items: [Product] = []
-	var selectedProduct: Binding<Product?>? //afficher la vue detail sur ipad sans naviguer (changer d'écran), Optionnel pour n'être utilisé que sur iPad
+	var selectedProduct: Binding<Product?>? //afficher la vue detail sur ipad sans naviguer (changer d'écran), optionnel pour n'être utilisé que sur iPad
 	
 	//MARK: -Initialization
 	init(categoryName: String = "", items: [Product] = [], selectedProduct: Binding<Product?>? = nil) {
@@ -24,7 +24,7 @@ struct CategoryRow: View {
 	}
 	
 	//MARK: -Body
-    var body: some View {
+	var body: some View {
 		VStack {
 			HStack {
 				Text(categoryName)
@@ -53,7 +53,7 @@ struct CategoryRow: View {
 		if horizontalSizeClass == .compact {
 			//iPhone: navigation
 			NavigationLink(destination: DetailsView(product: product)
-				//.background(Color("Background"))
+						   //.background(Color("Background"))
 				.environmentObject(ratingsVM)
 				.environmentObject(favoriteVM)
 			) {
@@ -77,10 +77,52 @@ struct CategoryRow: View {
 	}
 }
 
-/*#Preview {
-	let products = [Product(id: 1, picture: Product.Picture(url: "", description: ""), name: "test", likes: 10, price: 100, originalPrice: 110, category: .bottoms)]
-    return CategoryRow(
-		categoryName: products[0].category.rawValue,
-		items: Array(products.prefix(3))
-	)
-}*/
+//MARK: -Preview
+struct CategoryRow_Previews: PreviewProvider {
+	
+	// Mock Product
+	static var mockProducts: [Product] = [
+		Product(
+			id: 1,
+			picture: Product.Picture(
+				url: "https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Cr-ez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/bottoms/1.jpg",
+				description: "Modèle femme qui porte un jean et un haut jaune"
+			),
+			name: "Jean pour femme",
+			likes: 24,
+			price: 89.99,
+			originalPrice: 129.99,
+			category: .tops
+		),
+		Product(
+			id: 2,
+			picture: Product.Picture(
+				url: "https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Cr-ez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/bottoms/1.jpg",
+				description: "Modèle femme qui porte un jean et un haut jaune"
+			),
+			name: "Robe",
+			likes: 24,
+			price: 70,
+			originalPrice: 80,
+			category: .bottoms
+		),
+		Product(
+			id: 1,
+			picture: Product.Picture(
+				url: "https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Cr-ez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/bottoms/1.jpg",
+				description: "Haut vert"
+			),
+			name: "T-shirt",
+			likes: 32,
+			price: 25,
+			originalPrice: 32,
+			category: .tops
+		)
+	]
+	
+	static var previews: some View {
+		CategoryRow(categoryName: "Hauts", items: mockProducts)
+			.environmentObject(RatingsViewModel())  // utilise données ratingsMock par défaut
+			.environmentObject(FavoriteViewModel()) // idem pour favoris
+	}
+}

@@ -46,6 +46,7 @@ struct LaunchView: View {
 	}
 }
 
-/*#Preview {
-    LaunchView()
-}*/
+//MARK: -Preview
+#Preview {
+	LaunchView()
+}

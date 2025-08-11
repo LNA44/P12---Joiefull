@@ -16,7 +16,7 @@ struct IpadHomeView: View {
 	//MARK: -Private properties
 	@State private var selectedProduct: Product? = nil
 	
-    var body: some View {
+	var body: some View {
 		ZStack {
 			Color("Background")
 				.ignoresSafeArea()
@@ -27,7 +27,6 @@ struct IpadHomeView: View {
 							.listRowBackground(Color.clear)
 					}
 					.frame(height: 390)
-					//.background(Color.mint)
 					.listRowSeparator(.hidden)
 					.listRowInsets(EdgeInsets())
 				}
@@ -52,7 +51,16 @@ struct IpadHomeView: View {
 	}
 }
 
-/*#Preview {
-	IpadHomeView(viewModel: HomeViewModel(repository: JoiefullRepository()))
+//MARK: -Preview
+struct IpadHomeView_Previews: PreviewProvider {
+	static var previews: some View {
+		GeometryReader { geometry in
+			let mockRepository = MockJoiefullRepository()
+			let mockViewModel = HomeViewModel(repository: mockRepository)
+			
+			IpadHomeView(viewModel: mockViewModel, geometry: geometry)
+				.environmentObject(RatingsViewModel())
+				.environmentObject(FavoriteViewModel())
+		}
+	}
 }
-*/

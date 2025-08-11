@@ -18,7 +18,7 @@ enum APIError: LocalizedError, Equatable {
 		switch self {
 		case .invalidURL:
 			return "The URL is invalid."
-		case .invalidResponse: //response autre type que HTTPURLResponse
+		case .invalidResponse:
 			return "Invalid response from the server."
 		case .httpError(let statusCode):
 			return "HTTP error: \(statusCode)"

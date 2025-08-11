@@ -31,7 +31,7 @@ struct DetailsView: View {
 	
 	//MARK: -Body
 	var body: some View {
-		GeometryReader { geo in //pour adapter taille et dispo en fonction d'iphone ou ipad
+		GeometryReader { geo in //pour adapter taille et dispo en fonction de taille écran iphone ou ipad
 			let imageWidth = geo.size.width * 0.9
 			let imageHeight = geo.size.height * 0.55
 			ScrollView {
@@ -82,7 +82,7 @@ struct DetailsView: View {
 		ZStack {
 			HStack {
 				if let url = product.picture.imageURL { //optionnel donc vérif pas nil
-					AsyncImageView(url: url, width: imageWidth, height: imageHeight) //position adaptable iphone-ipad : 90% de la longueur et 60% de la largeur
+					AsyncImageView(url: url, width: imageWidth, height: imageHeight) //position adaptable iphone-ipad : 90% de la longueur et 55% de la largeur
 						.background(
 							GeometryReader { imageGeo in
 								Color.clear
@@ -121,8 +121,8 @@ struct DetailsView: View {
 			RoundedRectangle(cornerRadius: 20)
 				.fill(Color.white)
 				.frame(
-					width: horizontalSizeClass == .compact ? 78 : 89,  // 89 pour iPhone, 150 pour iPad ou autres
-					height: horizontalSizeClass == .compact ? 35 : 45  // idem
+					width: horizontalSizeClass == .compact ? 78 : 89,
+					height: horizontalSizeClass == .compact ? 35 : 45
 				)
 				.overlay(
 					HStack(spacing: 5) {
@@ -132,7 +132,7 @@ struct DetailsView: View {
 						
 						Text("\(favoriteVM.likesCount(for: product.id))")
 							.font(.system(
-								size: horizontalSizeClass == .compact ? 18 : 21, // 21 pour iPhone (compact), 28 pour iPad (regular)
+								size: horizontalSizeClass == .compact ? 18 : 21,
 								weight: .semibold
 							))
 							.foregroundColor(.black)
@@ -176,7 +176,7 @@ struct DetailsView: View {
 	
 	private var sectionPrix: some View {
 		HStack {
-			Text("\(String(format: "%.0f", product.price))€") //arrondi 0 chiffres aprèsla virgule
+			Text("\(String(format: "%.0f", product.price))€") //arrondi 0 chiffres après la virgule
 				.font(.system(size: 22))
 			
 			Spacer()
@@ -184,7 +184,7 @@ struct DetailsView: View {
 				.strikethrough(true, color: Color.black.opacity(0.8))
 				.font(.system(size: 22))
 				.foregroundColor(Color.black.opacity(0.8))
-
+			
 		}
 		.padding(.horizontal, 20)
 		.accessibilityElement()
@@ -274,7 +274,34 @@ struct DetailsView: View {
 	}
 }
 
-/*#Preview {
- DetailsView(product: Product(id: 32, picture: Product.Picture(url: "https://raw.githubusercontent.com/LNA44/P12---Creez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/accessories/1.jpg", description: "Description de la photo avec un sac à main orange"), name: "Sac orange", likes: 10, price: 100, originalPrice: 110, category: .bottoms))
- }
- */
+//MARK: -Preview
+struct DetailsView_Previews: PreviewProvider {
+	static let mockProduct = Product(
+		id: 1,
+		picture: Product.Picture(
+			url: "https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Cr-ez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/bottoms/1.jpg",
+			description: "Modèle femme qui porte un jean et un haut jaune"
+		),
+		name: "Jean pour femme",
+		likes: 24,
+		price: 89.99,
+		originalPrice: 129.99,
+		category: .tops
+	)
+	
+	static let ratingsVM: RatingsViewModel = {
+		let vm = RatingsViewModel()
+		vm.addRating(rating: 4.5, for: mockProduct.id)
+		return vm
+	}()
+	
+	static let favoriteVM = FavoriteViewModel()
+	
+	static var previews: some View {
+		NavigationStack { //utile pour afficher bouton retour, vérifier que navigationbar cachée,...
+			DetailsView(product: mockProduct)
+				.environmentObject(ratingsVM)
+				.environmentObject(favoriteVM)
+		}
+	}
+}

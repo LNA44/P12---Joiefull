@@ -26,10 +26,10 @@ class RatingsViewModel: ObservableObject {
 	}
 	
 	func getAverage(for productId: Int) -> Double {
-			let ratings = allRatings[productId] ?? []
-			guard !ratings.isEmpty else { return 0.0 }
-			let total = ratings.reduce(0, +) //somme des notes
-			return total / Double(ratings.count)
+		let ratings = allRatings[productId] ?? []
+		guard !ratings.isEmpty else { return 0.0 }
+		let total = ratings.reduce(0, +) //somme des notes
+		return total / Double(ratings.count)
 	}
 	
 	func getUserRating(for productId: Int) -> Double { //utile pour qu'à l'ouverture d'un produit on retrouve la note donnée par l'utilisateur avec le nombre d'étoiles sélectionnées
