@@ -6,30 +6,44 @@
 //
 
 import XCTest
+@testable import Joiefull
 
 final class RatingsViewModelTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+	
+	var ratingsVM: RatingsViewModel!
+	
+	override func setUp() {
+		super.setUp()
+		ratingsVM = RatingsViewModel()
+	}
+	
+	override func tearDown() {
+		ratingsVM = nil
+		super.tearDown()
+	}
+	
+	func test_addRating_increasesCountAndAffectsAverage() {
+		// Given
+		let productId = 1
+		
+		// When
+		ratingsVM.addRating(rating: 5.0, for: productId)
+		ratingsVM.addRating(rating: 3.0, for: productId)
+		
+		// Then
+		let ratings = ratingsVM.allRatings[productId]
+		XCTAssertEqual(ratings?.count, 5) //3 factices + 2 du test
+		XCTAssertEqual(ratingsVM.getAverage(for: productId), 4.0, accuracy: 0.001)
+	}
+	
+	func test_getAverage_whenNoRatings_returnsZero() {
+		// Given
+		let productId = 999
+		
+		// When
+		let average = ratingsVM.getAverage(for: productId)
+		
+		// Then
+		XCTAssertEqual(average, 0.0)
+	}
 }

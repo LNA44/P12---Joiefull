@@ -8,38 +8,45 @@
 import SwiftUI
 
 struct HomeView: View {
+	//MARK: -Public properties
 	@StateObject var viewModel: HomeViewModel
 	@StateObject var ratingsVM = RatingsViewModel()
 	@StateObject var favoriteVM = FavoriteViewModel()
+	@Environment(\.horizontalSizeClass) var horizontalSizeClass
+	@AccessibilityFocusState private var isFocused: Bool
 	
-	init() {
-		let repository = JoiefullRepository()
-		_viewModel = StateObject(wrappedValue: HomeViewModel(repository: repository))
+	//MARK: -Initialization
+	init(viewModel: HomeViewModel? = nil) {
+		if let viewModel {
+			_viewModel = StateObject(wrappedValue: viewModel)
+		} else {
+			let repository = JoiefullRepository()
+			_viewModel = StateObject(wrappedValue: HomeViewModel(repository: repository))
+		}
 	}
 	
+	//MARK: -Body
 	var body: some View {
 		NavigationStack {
-			List {
-				ForEach(viewModel.categories.keys.sorted(), id: \.self) { key in
-					CategoryRow(categoryName: key, items: viewModel.categories[key] ?? [])
-						
-						.padding(.bottom, -10)
-						.padding(.top, -20)
+			// iPad : Split View
+			if horizontalSizeClass == .regular {
+				GeometryReader { geometry in
+					IpadHomeView(viewModel: viewModel, geometry: geometry)
+						.accessibilityFocused($isFocused)
+						.accessibilityLabel("Accueil iPad, liste des produits")
 				}
-				.listRowSeparator(.hidden)
-				.listRowInsets(EdgeInsets())
-			}
-			.padding(.top, -45)
-			.padding(.top, UIDevice.current.userInterfaceIdiom == .pad ? 50 : 0)
-			.scrollContentBackground(.hidden)
-			.onAppear {
-				Task {
-					await viewModel.fetchProducts()
-				}
+			} else {
+				// iPhone : navigation vers la vue de détail
+				IphoneHomeView(viewModel: viewModel)
+					.accessibilityFocused($isFocused)
+					.accessibilityLabel("Accueil iPhone, liste des produits")
 			}
 		}
 		.environmentObject(ratingsVM)
 		.environmentObject(favoriteVM)
+		.alert(isPresented: $viewModel.showAlert) {
+			Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? ""), dismissButton: .default(Text("OK")))
+		}
 		.onAppear {
 			Task {
 				await viewModel.fetchProducts()
@@ -48,11 +55,18 @@ struct HomeView: View {
 	}
 }
 
-//créer mock
-/*struct HomeView_Preview: PreviewProvider {
- static var previews: some View {
- let repository = JoiefullRepository()
- let vm = HomeViewModel(repository: repository)
- return HomeView(viewModel: vm)
+//MARK: -Preview
+struct HomeView_Previews: PreviewProvider {
+	
+	static var previews: some View {
+		Group {
+			// iPhone
+			HomeView(viewModel: HomeViewModel(repository: MockJoiefullRepository()))
+				.previewDisplayName("iPhone")
+			
+			// iPad
+			HomeView(viewModel: HomeViewModel(repository: MockJoiefullRepository()))
+				.previewDisplayName("iPad")
+		}
 	}
-}*/
+}

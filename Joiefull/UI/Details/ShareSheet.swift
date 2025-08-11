@@ -9,15 +9,18 @@ import SwiftUI
 import UIKit
 
 struct ShareSheet: UIViewControllerRepresentable { //création vue en UIKit dans app en SwiftUI
-	var comment: String
-	var productDescription: String
+	var productImageURL: String
+	var defaultComment: String
 	@Binding var isPresented: Bool
 	
 	func makeUIViewController(context: Context) -> UIActivityViewController {
-		let message = "\(comment)\n\nDescription du produit : \(productDescription)"
+		// On prépare les éléments à partager
+		let urlString = convertStringToURL(string: productImageURL)?.absoluteString ?? "Lien non disponible"
+		let message = "\(defaultComment)\n\n Voici le lien vers l'image du produit : \(urlString))"
+		
 		let activityVC = UIActivityViewController(activityItems: [message], applicationActivities: nil)
 		
-		activityVC.completionWithItemsHandler = { _, _, _, _ in //calback après partage de l'utilisateur
+		activityVC.completionWithItemsHandler = { _, _, _, _ in //callback après partage de l'utilisateur
 			isPresented = false
 		}
 		
@@ -25,5 +28,9 @@ struct ShareSheet: UIViewControllerRepresentable { //création vue en UIKit dans
 	}
 	
 	func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) { //utile quand valeurs doient changer après affiche du VC
+	}
+	
+	func convertStringToURL(string: String) -> URL? {
+		return URL(string: string)
 	}
 }

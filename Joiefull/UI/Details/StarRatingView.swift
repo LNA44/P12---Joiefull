@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct StarRatingView: View {
-	@Binding var rating: Double
+	//MARK: -Public properties
+	@Binding var rating: Double //lié au get/set de detailsView, permet d'envoyer ou de récupérer des données du VM
 	var maximumRating = 5
 	var starSize: CGFloat = 30
 	var onColor = Color.orange
 	var offColor = Color.gray
 	
+	//MARK: -Body
 	var body: some View {
 		HStack(spacing: 8) {
 			ForEach(1...maximumRating, id: \.self) { number in
@@ -29,13 +31,28 @@ struct StarRatingView: View {
 	}
 }
 
-/*struct StarRatingView_Previews: PreviewProvider {
-	@State static var rating = 3  // valeur de départ pour tester
+//MARK: -Preview
+struct StarRatingView_Previews: PreviewProvider {
+	
+	@State static var previewRating: Double = 3.0
 	
 	static var previews: some View {
-		// On passe une Binding avec $ pour pouvoir modifier la note dans la preview
-		StarRatingView(rating: $rating)
-			.previewLayout(.sizeThatFits) // pour que la preview s'adapte à la taille
-			.padding()
+		Group {
+			// Preview simple
+			StarRatingView(rating: $previewRating)
+				.previewDisplayName("Par défaut")
+			
+			// Preview avec paramètres personnalisés
+			StarRatingView(
+				rating: $previewRating,
+				maximumRating: 10,
+				starSize: 20,
+				onColor: .yellow,
+				offColor: .blue
+			)
+			.previewDisplayName("Personnalisé")
+		}
+		.padding()
+		.previewLayout(.sizeThatFits)
 	}
-}*/
+}

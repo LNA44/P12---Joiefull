@@ -8,82 +8,34 @@
 import SwiftUI
 
 struct CategoryItem: View {
+	//MARK: -Public properties
 	@EnvironmentObject var ratingsVM: RatingsViewModel
 	@EnvironmentObject var favoriteVM: FavoriteViewModel
-
+	@Environment(\.horizontalSizeClass) var horizontalSizeClass
+	var isSelected = false
 	var product: Product
-
+	
+	//MARK: -Private properties
+	private var imageWidth: CGFloat {
+		horizontalSizeClass == .compact ? 198 : 221
+	}
+	
+	private var imageHeight: CGFloat {
+		horizontalSizeClass == .compact ? 198 : 254
+	}
+	
+	//MARK: -Body
 	var body: some View {
-		VStack() {
-			ZStack {
-				if let url = product.picture.imageURL { //optionnel donc vérif pas nil
-					AsyncImageView(url: url)
-						.accessibilityElement()
-						.accessibilityLabel("\(product.picture.description)")
-				}
-				
-				ZStack {
-					Button (action: {
-					}) {
-						RoundedRectangle(cornerRadius: 20)
-							.fill(Color.white)
-							.frame(width:CGFloat(51), height:CGFloat(27))
-							.offset(x: 80, y: 75)
-
-						HStack(spacing: 5) {
-							Image(systemName: favoriteVM.isFavorite(product.id) ? "heart.fill" : "heart")
-								.frame(width: CGFloat(14))
-								.foregroundColor(.black)
-							
-							Text("\(favoriteVM.likesCount(for: product.id))")
-								.font(.system(size: CGFloat(14), weight: .semibold, design: .default))
-								.foregroundColor(.black)
-						}
-						.offset(x: 28, y: 75)
-					}
-				}
-				.accessibilityElement()
-				.accessibilityLabel("Le produit a été aimé par \(product.likes) d'utilisateurs")
-			}
+		VStack(spacing: 10) {
+			productImageSection
 			
 			VStack(spacing: 3) {
-				HStack(alignment: .top) {
-					VStack(alignment: .leading, spacing: 0) {
-						Text(product.name)
-							.font(.system(size: 14, weight: .semibold, design: .default))
-							.multilineTextAlignment(.leading)
-							.lineLimit(nil)       // aucune limite de lignes
-							.fixedSize(horizontal: false, vertical: true)
-							.accessibilityHidden(true)
-					}
-					Spacer()
-					HStack(spacing: 2) {
-						Image(systemName: "star.fill")
-							.foregroundColor(.orange)
-							.font(.system(size: 12))
-						Text(String(format: "%.1f", ratingsVM.getAverage(for: product.id)))
-							.font(.system(size: 14))
-					}
-					.accessibilityElement()
-					.accessibilityLabel("Ce produit a reçu une note moyenne de \(String(format: "%.1f", ratingsVM.getAverage(for: product.id))) sur 5 étoiles")
-				}
-				
-				HStack {
-					Text("\(String(format: "%.0f", product.price))€") //arrondi 0 chiffres aprèsla virgule
-							.font(.system(size: 14))
-					
-					Spacer()
-					Text(String("\(String(format: "%.0f", product.originalPrice))€"))
-						.strikethrough(true, color: Color.black.opacity(0.8))
-						.font(.system(size: 14))
-						.foregroundColor(Color.black.opacity(0.8))
-				}
-				.accessibilityElement()
-				.accessibilityLabel("Prix réduit : \(Int(product.price)) euros; prix d'origine : \(Int(product.originalPrice)) euros, barré.")
-				Spacer()
+				productNameAndRating
+				productPrice
 			}
-			.frame(maxWidth: 182)
-			.frame(height: 65)
+			.padding(.horizontal, 5)
+			.frame(maxWidth: imageWidth)
+			Spacer()
 		}
 		.onAppear {
 			// Initialiser les likes
@@ -91,12 +43,130 @@ struct CategoryItem: View {
 				favoriteVM.setInitialLikes(for: product.id, count: product.likes)
 			}
 		}
-		.padding(.leading, 15)
-		.padding(.trailing, -5)
+		.frame(height: horizontalSizeClass == .compact ? 260 : 330)
+	}
+	
+	//MARK: -Sections
+	private var productImageSection: some View {
+		ZStack {
+			if let url = product.picture.imageURL { //optionnel donc vérif pas nil
+				AsyncImageView(url: url, width: imageWidth, height: imageHeight)
+					.overlay(
+						RoundedRectangle(cornerRadius: 16)
+							.stroke(isSelected ? (Color("SelectedItem")) : Color.clear, lineWidth: 4)
+					)
+			}
+			favoriteButton
+		}
+	}
+	
+	private var favoriteButton: some View {
+		ZStack {
+			Button (action: {
+			}) {
+				RoundedRectangle(cornerRadius: 20)
+					.fill(Color.white)
+					.frame(width:CGFloat(51), height:CGFloat(27))
+					.offset(x: horizontalSizeClass == .compact ? 80 : 90, y: horizontalSizeClass == .compact ? 75 : 95)
+					.accessibilityHidden(true)
+				
+				HStack(spacing: 5) {
+					Image(systemName: favoriteVM.isFavorite(product.id) ? "heart.fill" : "heart")
+						.frame(width: CGFloat(14))
+						.foregroundColor(.black)
+						.accessibilityHidden(true)
+					
+					Text("\(favoriteVM.likesCount(for: product.id))")
+						.font(.system(size: CGFloat(14), weight: .semibold, design: .default))
+						.foregroundColor(.black)
+						.accessibilityHidden(true)
+				}
+				.offset(x: horizontalSizeClass == .compact ? 28 : 39,  y: horizontalSizeClass == .compact ? 75 : 95)
+			}
+		}
+	}
+	
+	var productNameAndRating: some View {
+		HStack(alignment: .top) {
+			VStack {
+				Text(product.name)
+					.foregroundColor(isSelected ? Color("SelectedItem") : Color.primary)
+					.font(.system(
+						size: horizontalSizeClass == .compact ? 14 : 18,
+						weight: .semibold,
+						design: .default
+					))
+					.multilineTextAlignment(.leading)
+					.lineLimit(nil)       // aucune limite de lignes
+					.fixedSize(horizontal: false, vertical: true)
+			}
+			Spacer()
+			HStack(spacing: 2) {
+				Image(systemName: "star.fill")
+					.foregroundColor(.orange)
+					.font(.system(
+						size: horizontalSizeClass == .compact ? 12 : 18,
+					))
+					.accessibilityHidden(true)
+				Text(String(format: "%.1f", ratingsVM.getAverage(for: product.id)))
+					.foregroundColor(isSelected ? Color("SelectedItem") : Color.primary)
+					.font(.system(
+						size: horizontalSizeClass == .compact ? 14 : 18,
+					))
+					.accessibilityHidden(true)
+			}
+		}
+	}
+	
+	var productPrice: some View {
+		HStack {
+			Text("\(String(format: "%.0f", product.price))€") //arrondi 0 chiffres après la virgule
+				.foregroundColor(isSelected ? Color("SelectedItem") : Color.primary)
+				.font(.system(
+					size: horizontalSizeClass == .compact ? 14 : 18,
+				))
+				.accessibilityHidden(true)
+			
+			Spacer()
+			Text(String("\(String(format: "%.0f", product.originalPrice))€"))
+				.strikethrough(true, color: isSelected ? Color("SelectedItem") : Color.black.opacity(0.8))
+				.foregroundColor(isSelected ? Color("SelectedItem") : Color.primary)
+				.font(.system(
+					size: horizontalSizeClass == .compact ? 14 : 18,
+				))
+				.foregroundColor(Color.black.opacity(0.8))
+				.accessibilityHidden(true)
+		}
 	}
 }
 
-/*#Preview {
-	let product = Product(id: 32, picture: Product.Picture(url: "https://raw.githubusercontent.com/LNA44/P12---Creez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/accessories/1.jpg", description: ""), name: "test", likes: 10, price: 100, originalPrice: 110, category: .bottoms)
-	CategoryItem(product: product)
-}*/
+//MARK: -Preview
+struct CategoryItem_Previews: PreviewProvider {
+	static var mockProduct: Product =
+	Product(
+		id: 1,
+		picture: Product.Picture(
+			url: "https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Cr-ez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/bottoms/1.jpg",
+			description: "Modèle femme qui porte un jean et un haut jaune"
+		),
+		name: "Jean pour femme",
+		likes: 24,
+		price: 89.99,
+		originalPrice: 129.99,
+		category: .tops
+	)
+	
+	static var previews: some View {
+		Group {
+			CategoryItem(isSelected: false, product: mockProduct)
+				.environmentObject(RatingsViewModel())
+				.environmentObject(FavoriteViewModel())
+				.previewDevice("iPhone 14")
+			
+			CategoryItem(isSelected: true, product: mockProduct)
+				.environmentObject(RatingsViewModel())
+				.environmentObject(FavoriteViewModel())
+				.previewDevice("iPad Pro (12.9-inch) (6th generation)")
+		}
+	}
+}
