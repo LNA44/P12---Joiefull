@@ -10,7 +10,7 @@ import XCTest
 
 final class JoiefullRepositoryTests: XCTestCase {
 
-	let mockData = JoiefullRepositoryMock()
+	let mockData = JoiefullRepositoryDataMock()
 	
 	lazy var session: URLSession = {
 		let configuration = URLSessionConfiguration.ephemeral
@@ -51,10 +51,10 @@ final class JoiefullRepositoryTests: XCTestCase {
 		
 		//When & Then
 		do {
-			_ = try await repository.fetchProducts()
-			XCTFail("Expected to throw APIError.emptyData but did not throw")
+			let emptyData = try await repository.fetchProducts()
+			XCTAssertEqual(emptyData, [])
 		} catch APIError.emptyData {
-			// Succès
+			//Succes
 		} catch {
 			XCTFail("Unexpected error thrown: \(error)")
 		}

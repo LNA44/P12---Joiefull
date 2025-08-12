@@ -31,12 +31,14 @@
 		F38F71B52E3A669D00AD39BA /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F71B42E3A669D00AD39BA /* LaunchView.swift */; };
 		F38F71B82E3A6A8F00AD39BA /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F71B72E3A6A8F00AD39BA /* DetailsView.swift */; };
 		F3C77E6B2E4B94B200A8C961 /* FavoriteViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E652E4B94B200A8C961 /* FavoriteViewModelTests.swift */; };
-		F3C77E6C2E4B94B200A8C961 /* JoiefullRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E662E4B94B200A8C961 /* JoiefullRepositoryMock.swift */; };
+		F3C77E6C2E4B94B200A8C961 /* JoiefullRepositoryDataMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E662E4B94B200A8C961 /* JoiefullRepositoryDataMock.swift */; };
 		F3C77E6D2E4B94B200A8C961 /* JoiefullRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E672E4B94B200A8C961 /* JoiefullRepositoryTests.swift */; };
 		F3C77E6E2E4B94B200A8C961 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E682E4B94B200A8C961 /* MockURLProtocol.swift */; };
 		F3C77E6F2E4B94B200A8C961 /* RatingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E692E4B94B200A8C961 /* RatingsViewModelTests.swift */; };
 		F3C77E752E4B9A9B00A8C961 /* JoiefullAPIServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E742E4B9A9B00A8C961 /* JoiefullAPIServiceTests.swift */; };
 		F3C77E772E4B9ADC00A8C961 /* JoiefullAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E762E4B9ADC00A8C961 /* JoiefullAPIServiceMock.swift */; };
+		F3C77E792E4BA3AD00A8C961 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E782E4BA3AD00A8C961 /* HomeViewModelTests.swift */; };
+		F3C77E7B2E4BA41600A8C961 /* JoiefullRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E7A2E4BA41600A8C961 /* JoiefullRepositoryMock.swift */; };
 		F3D39EF72E49EFF400233D40 /* FakeJoiefullRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D39EF62E49EFF400233D40 /* FakeJoiefullRepository.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,12 +79,14 @@
 		F38F71B42E3A669D00AD39BA /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		F38F71B72E3A6A8F00AD39BA /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		F3C77E652E4B94B200A8C961 /* FavoriteViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModelTests.swift; sourceTree = "<group>"; };
-		F3C77E662E4B94B200A8C961 /* JoiefullRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullRepositoryMock.swift; sourceTree = "<group>"; };
+		F3C77E662E4B94B200A8C961 /* JoiefullRepositoryDataMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullRepositoryDataMock.swift; sourceTree = "<group>"; };
 		F3C77E672E4B94B200A8C961 /* JoiefullRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullRepositoryTests.swift; sourceTree = "<group>"; };
 		F3C77E682E4B94B200A8C961 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		F3C77E692E4B94B200A8C961 /* RatingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsViewModelTests.swift; sourceTree = "<group>"; };
 		F3C77E742E4B9A9B00A8C961 /* JoiefullAPIServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullAPIServiceTests.swift; sourceTree = "<group>"; };
 		F3C77E762E4B9ADC00A8C961 /* JoiefullAPIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullAPIServiceMock.swift; sourceTree = "<group>"; };
+		F3C77E782E4BA3AD00A8C961 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
+		F3C77E7A2E4BA41600A8C961 /* JoiefullRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullRepositoryMock.swift; sourceTree = "<group>"; };
 		F3D39EF62E49EFF400233D40 /* FakeJoiefullRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeJoiefullRepository.swift; sourceTree = "<group>"; };
 		F3F415972E464BDD004643C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -218,7 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				F3C77E672E4B94B200A8C961 /* JoiefullRepositoryTests.swift */,
-				F3C77E662E4B94B200A8C961 /* JoiefullRepositoryMock.swift */,
+				F3C77E662E4B94B200A8C961 /* JoiefullRepositoryDataMock.swift */,
 			);
 			path = RepositoryTests;
 			sourceTree = "<group>";
@@ -228,6 +232,8 @@
 			children = (
 				F3C77E652E4B94B200A8C961 /* FavoriteViewModelTests.swift */,
 				F3C77E692E4B94B200A8C961 /* RatingsViewModelTests.swift */,
+				F3C77E782E4BA3AD00A8C961 /* HomeViewModelTests.swift */,
+				F3C77E7A2E4BA41600A8C961 /* JoiefullRepositoryMock.swift */,
 			);
 			path = VMTests;
 			sourceTree = "<group>";
@@ -385,8 +391,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3C77E752E4B9A9B00A8C961 /* JoiefullAPIServiceTests.swift in Sources */,
+				F3C77E7B2E4BA41600A8C961 /* JoiefullRepositoryMock.swift in Sources */,
 				F3C77E6B2E4B94B200A8C961 /* FavoriteViewModelTests.swift in Sources */,
-				F3C77E6C2E4B94B200A8C961 /* JoiefullRepositoryMock.swift in Sources */,
+				F3C77E6C2E4B94B200A8C961 /* JoiefullRepositoryDataMock.swift in Sources */,
+				F3C77E792E4BA3AD00A8C961 /* HomeViewModelTests.swift in Sources */,
 				F3C77E6D2E4B94B200A8C961 /* JoiefullRepositoryTests.swift in Sources */,
 				F3C77E772E4B9ADC00A8C961 /* JoiefullAPIServiceMock.swift in Sources */,
 				F3C77E6E2E4B94B200A8C961 /* MockURLProtocol.swift in Sources */,

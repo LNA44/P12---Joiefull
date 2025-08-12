@@ -13,7 +13,7 @@ enum MockScenarioJoiefullRepository {
 	case emptyData
 }
 
-struct JoiefullRepositoryMock {
+struct JoiefullRepositoryDataMock {
 	func makeMock(for scenario: MockScenarioJoiefullRepository) -> (URLResponse?, Data?, Error?) {
 		switch scenario {
 		case .success:

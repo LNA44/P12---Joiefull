@@ -56,7 +56,7 @@ final class JoiefullAPIServiceTests: XCTestCase {
 		}
 	}
 	
-	func testCreateRequestySucess() {
+	func testCreateRequestSucess() {
 		//Given
 		let endpoint: URL = URL(string: "https://example.com")!
 		//When
@@ -151,10 +151,6 @@ final class JoiefullAPIServiceTests: XCTestCase {
 		//When & Then
 		do {
 			let responseJSON = try apiService.decode([Product].self, data: data)
-			guard let responseJSON = responseJSON else {
-				XCTFail("Decoded response is nil")
-				return
-			}
 			XCTAssertEqual(responseJSON[0].likes, 56)
 		} catch {
 			XCTFail("Unexpected error type: \(error)")
@@ -163,17 +159,13 @@ final class JoiefullAPIServiceTests: XCTestCase {
 	
 	func testDecodeDecodingErrorOccurs() {
 		//Given
-		let (_,expectedData,_) = mockData.makeMock(for: .success)
+		let (_,expectedData,_) = mockData.makeMock(for: .decodingError)
 		guard let data = expectedData else {
 			return
 		}
 		//When & Then
 		do {
-			let responseJSON = try apiService.decode([Product].self, data: data)
-			guard responseJSON != nil else {
-				XCTFail("Decoded response is nil")
-				return
-			}
+			_ = try apiService.decode([Product].self, data: data)
 		} catch APIError.decodingError {
 			XCTAssertTrue(true, "Caught expected APIError.decodingError")
 		} catch {
@@ -181,7 +173,28 @@ final class JoiefullAPIServiceTests: XCTestCase {
 		}
 	}
 	
-	func testFetchAndDecodeWithoutBodySuccess() async {
+	func testDecodeEmptyDataThrowsDecodingError() {
+		// Given
+		let (_, expectedDataOptional, _) = mockData.makeMock(for: .emptyData)
+		
+		guard let expectedData = expectedDataOptional else {
+			XCTFail("Expected data should not be nil")
+			return
+		}
+		
+		// When & Then
+		do {
+			// On utilise un type non-tableau, par exemple Product seul
+			_ = try apiService.decode(Product.self, data: expectedData)
+			XCTFail("Expected APIError.decodingError to be thrown")
+		} catch APIError.decodingError {
+			XCTAssertTrue(true, "Caught expected APIError.decodingError")
+		} catch {
+			XCTFail("Unexpected error type: \(error)")
+		}
+	}
+	
+	func testFetchAndDecodeSuccessDataNotEmpty() async {
 		//Given
 		let endpoint = URL(string: "https://example.com")!
 		var request = URLRequest(url: endpoint)
@@ -191,7 +204,7 @@ final class JoiefullAPIServiceTests: XCTestCase {
 		//When & Then
 		do {
 			let decodedData = try await apiService.fetchAndDecode([Product].self, request: request)
-			XCTAssertNotNil(decodedData)
+			XCTAssertFalse(decodedData.isEmpty)
 		} catch {
 			XCTFail("Unexpected error type: \(error)")
 		}
@@ -206,9 +219,8 @@ final class JoiefullAPIServiceTests: XCTestCase {
 		let (_,_,_) = mockData.makeMock(for: .emptyData)
 		//When & Then
 		do {
-			_ = try await apiService.fetchAndDecode([Product].self, request: request)
-		} catch APIError.emptyData {
-			XCTAssertTrue(true, "Caught expected APIError.emptyData")
+			let emptyDecodedData = try await apiService.fetchAndDecode([Product].self, request: request)
+			XCTAssertEqual(emptyDecodedData, [])
 		} catch {
 			XCTFail("Unexpected error type: \(error)")
 		}

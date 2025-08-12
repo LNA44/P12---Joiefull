@@ -187,10 +187,10 @@ final class JoiefullAPIServiceMock {
 			let response = HTTPURLResponse(url: URL(string: "http://localhost/mock")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
 			
 			let jsonData = """
-		  {
-		   "date": Date()
-		  }
-		  """.data(using: .utf8)!
+			{
+			  "date": "2025-08-12"
+			}
+			""".data(using: .utf8)!
 			
 			MockURLProtocol.requestHandler = { request in
 				return (response, jsonData, nil) // Réponse simulée

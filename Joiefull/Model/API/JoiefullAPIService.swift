@@ -38,24 +38,28 @@ struct JoiefullAPIService {
 		guard httpResponse.statusCode == 200 else {
 			throw APIError.httpError(statusCode: httpResponse.statusCode)
 		}
-		if data.isEmpty {
-			throw APIError.emptyData
-		}
 		return data
 	}
 	
-	func decode<T: Decodable>(_ type: T.Type, data: Data) throws -> T? {
-		guard let responseJSON = try? JSONDecoder().decode(T.self, from: data) else { //T: plusieurs types possibles : [String, String], AccountResponse
+	func decode<T: Decodable>(_ type: T.Type, data: Data) throws -> T {
+		if data.isEmpty {
+			if let emptyArray = [] as? T {
+				return emptyArray
+			} else {
+				throw APIError.decodingError
+			}
+		}
+		do {
+			let responseJSON = try JSONDecoder().decode(T.self, from: data)
+			return responseJSON
+		} catch {
+			// Ici on attrape toutes les erreurs de décodage et on renvoie APIError.decodingError
 			throw APIError.decodingError
 		}
-		return responseJSON
 	}
-	
-	func fetchAndDecode<T: Decodable>(_ type: T.Type, request: URLRequest) async throws -> T? {
+
+	func fetchAndDecode<T: Decodable>(_ type: T.Type, request: URLRequest) async throws -> T {
 		let data = try await fetch(request: request)
-		if data.isEmpty {
-			return nil
-		}
 		let decodedData = try decode(T.self, data: data)
 		return decodedData
 	}
