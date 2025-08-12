@@ -8,6 +8,6 @@
 import Foundation
 
 struct Constants {
-	static let baseURL = "https://raw.githubusercontent.com/LNA44/P12---Creez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/api/clothes.json"
+	static var baseURL = "https://raw.githubusercontent.com/LNA44/P12---Creez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/api/clothes.json"
 	static let method = "GET"
 }

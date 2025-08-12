@@ -81,7 +81,7 @@ struct CategoryRow: View {
 struct CategoryRow_Previews: PreviewProvider {
 	
 	// Mock Product
-	static var mockProducts: [Product] = [
+	static var fakeProducts: [Product] = [
 		Product(
 			id: 1,
 			picture: Product.Picture(
@@ -121,7 +121,7 @@ struct CategoryRow_Previews: PreviewProvider {
 	]
 	
 	static var previews: some View {
-		CategoryRow(categoryName: "Hauts", items: mockProducts)
+		CategoryRow(categoryName: "Hauts", items: fakeProducts)
 			.environmentObject(RatingsViewModel())  // utilise données ratingsMock par défaut
 			.environmentObject(FavoriteViewModel()) // idem pour favoris
 	}

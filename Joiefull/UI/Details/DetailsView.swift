@@ -276,7 +276,7 @@ struct DetailsView: View {
 
 //MARK: -Preview
 struct DetailsView_Previews: PreviewProvider {
-	static let mockProduct = Product(
+	static let fakeProduct = Product(
 		id: 1,
 		picture: Product.Picture(
 			url: "https://raw.githubusercontent.com/OpenClassrooms-Student-Center/Cr-ez-une-interface-dynamique-et-accessible-avec-SwiftUI/main/img/bottoms/1.jpg",
@@ -291,7 +291,7 @@ struct DetailsView_Previews: PreviewProvider {
 	
 	static let ratingsVM: RatingsViewModel = {
 		let vm = RatingsViewModel()
-		vm.addRating(rating: 4.5, for: mockProduct.id)
+		vm.addRating(rating: 4.5, for: fakeProduct.id)
 		return vm
 	}()
 	
@@ -299,7 +299,7 @@ struct DetailsView_Previews: PreviewProvider {
 	
 	static var previews: some View {
 		NavigationStack { //utile pour afficher bouton retour, vérifier que navigationbar cachée,...
-			DetailsView(product: mockProduct)
+			DetailsView(product: fakeProduct)
 				.environmentObject(ratingsVM)
 				.environmentObject(favoriteVM)
 		}

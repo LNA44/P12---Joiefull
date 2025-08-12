@@ -61,11 +61,11 @@ struct HomeView_Previews: PreviewProvider {
 	static var previews: some View {
 		Group {
 			// iPhone
-			HomeView(viewModel: HomeViewModel(repository: MockJoiefullRepository()))
+			HomeView(viewModel: HomeViewModel(repository: FakeJoiefullRepository(productSet: .twoProducts)))
 				.previewDisplayName("iPhone")
 			
 			// iPad
-			HomeView(viewModel: HomeViewModel(repository: MockJoiefullRepository()))
+			HomeView(viewModel: HomeViewModel(repository: FakeJoiefullRepository(productSet: .twoProducts)))
 				.previewDisplayName("iPad")
 		}
 	}

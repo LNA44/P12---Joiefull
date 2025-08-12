@@ -142,7 +142,7 @@ struct CategoryItem: View {
 
 //MARK: -Preview
 struct CategoryItem_Previews: PreviewProvider {
-	static var mockProduct: Product =
+	static var fakeProduct: Product =
 	Product(
 		id: 1,
 		picture: Product.Picture(
@@ -158,12 +158,12 @@ struct CategoryItem_Previews: PreviewProvider {
 	
 	static var previews: some View {
 		Group {
-			CategoryItem(isSelected: false, product: mockProduct)
+			CategoryItem(isSelected: false, product: fakeProduct)
 				.environmentObject(RatingsViewModel())
 				.environmentObject(FavoriteViewModel())
 				.previewDevice("iPhone 14")
 			
-			CategoryItem(isSelected: true, product: mockProduct)
+			CategoryItem(isSelected: true, product: fakeProduct)
 				.environmentObject(RatingsViewModel())
 				.environmentObject(FavoriteViewModel())
 				.previewDevice("iPad Pro (12.9-inch) (6th generation)")

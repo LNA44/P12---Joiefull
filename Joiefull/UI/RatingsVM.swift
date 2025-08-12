@@ -14,15 +14,25 @@ class RatingsViewModel: ObservableObject {
 	
 	//MARK: -Initialization
 	init() {
-		self.allRatings = ratingsMock
+		self.allRatings = RatingsMock.data.reduce(into: [:]) { result, pair in //permet d'avoir [Int: [Double]] au lieu de [Product: [Double]]
+			result[pair.key.rawValue] = pair.value
+		}
 	}
 	
 	//MARK: -Methods
 	func addRating(rating: Double, for productId: Int) {
-		if userRatings[productId] == nil { //empecher l'utilisateur de revoter
-			allRatings[productId, default: []].append(rating) //ajout note au tableau du produit
+		if let oldRating = userRatings[productId] {
+			// L'utilisateur a déjà voté: remplacer sa note dans allRatings
+			if let index = allRatings[productId]?.firstIndex(of: oldRating) {
+				allRatings[productId]?[index] = rating
+			}
+		} else {
+			// Premier vote: ajouter la note
+			allRatings[productId, default: []].append(rating) 
 		}
-		userRatings[productId] = rating //ajout de la note au tableau des notes de l'utilisateur
+		
+		// Mettre à jour (ou enregistrer) le vote de l'utilisateur
+		userRatings[productId] = rating
 	}
 	
 	func getAverage(for productId: Int) -> Double {

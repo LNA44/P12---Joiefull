@@ -16,7 +16,14 @@ class FavoriteViewModel: ObservableObject {
 	func toggleFavorite(for productId: Int) {
 		if userFavorites.contains(productId) {
 			userFavorites.remove(productId)
-			totalLikes[productId, default: 1] -= 1
+			
+			// Décrémenter seulement si la valeur est > 0
+			if let currentLikes = totalLikes[productId], currentLikes > 0 {
+				totalLikes[productId] = currentLikes - 1
+			} else {
+				totalLikes[productId] = 0
+			}
+			
 		} else {
 			userFavorites.insert(productId)
 			totalLikes[productId, default: 0] += 1
