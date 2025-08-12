@@ -105,13 +105,13 @@ struct CategoryItem: View {
 				Image(systemName: "star.fill")
 					.foregroundColor(.orange)
 					.font(.system(
-						size: horizontalSizeClass == .compact ? 12 : 18,
+						size: horizontalSizeClass == .compact ? 12 : 18
 					))
 					.accessibilityHidden(true)
 				Text(String(format: "%.1f", ratingsVM.getAverage(for: product.id)))
 					.foregroundColor(isSelected ? Color("SelectedItem") : Color.primary)
 					.font(.system(
-						size: horizontalSizeClass == .compact ? 14 : 18,
+						size: horizontalSizeClass == .compact ? 14 : 18
 					))
 					.accessibilityHidden(true)
 			}
