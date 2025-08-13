@@ -11,6 +11,7 @@ struct DetailsView: View {
 	//MARK: -Public properties
 	var product: Product
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
+	@Environment(\.colorScheme) var colorScheme //définit les couleurs pour modes clair et sombre
 	@StateObject var viewModel: DetailsViewModel
 	@EnvironmentObject var ratingsVM: RatingsViewModel
 	@EnvironmentObject var favoriteVM: FavoriteViewModel
@@ -48,7 +49,6 @@ struct DetailsView: View {
 					sectionDescription
 					sectionNotationUtilisateur
 					sectionCommentaire
-					sectionLikesUtilisateur
 				}
 				.sheet(isPresented: $isImageFullscreen) {
 					FullscreenImageView(imageURL: product.picture.imageURL)
@@ -181,9 +181,9 @@ struct DetailsView: View {
 			
 			Spacer()
 			Text(String("\(String(format: "%.0f", product.originalPrice))€"))
-				.strikethrough(true, color: Color.black.opacity(0.8))
+				.strikethrough(true, color: colorScheme == .dark ? Color.white : Color.black.opacity(0.8))
 				.font(.system(size: 22))
-				.foregroundColor(Color.black.opacity(0.8))
+				.foregroundColor(colorScheme == .dark ? Color.white : Color.black.opacity(0.8))
 			
 		}
 		.padding(.horizontal, 20)
@@ -225,34 +225,94 @@ struct DetailsView: View {
 	}
 	
 	private var sectionCommentaire: some View {
-		ZStack(alignment: .topLeading) {
-			TextEditor(text: $userComment)
-				.padding(.horizontal, 10)
-				.padding(.top, 8)
-				.frame(height: horizontalSizeClass == .compact ? 150 : 60)
-				.overlay(
-					RoundedRectangle(cornerRadius: 8)
-						.stroke(Color.gray.opacity(0.5), lineWidth: 1)
-						.background(horizontalSizeClass == .compact ? Color.clear : Color("Background"))
-				)
-				.accessibilityLabel("Partagez ici vos impressions sur cette pièce")
-			if userComment.isEmpty {
-				Text("Partagez ici vos impressions sur cette pièce")
-					.foregroundColor(.gray)
-					.font(.system(size: 14))
-					.padding(.horizontal, 14)
-					.padding(.top, 12)
+
+		VStack {
+			ZStack(alignment: .topLeading) {
+				TextEditor(text: $userComment)
+					.scrollContentBackground(.hidden)
+					.background(
+						horizontalSizeClass == .compact
+						? Color.clear
+						: Color("Background")
+					)
+					.padding(.horizontal, 10)
+					.padding(.top, 8)
+					.frame(height: horizontalSizeClass == .compact ? 150 : 60)
+					.overlay(
+						RoundedRectangle(cornerRadius: 8)
+							.stroke(Color.gray.opacity(0.5), lineWidth: 1)
+							.allowsHitTesting(false)
+							.background(Color.clear)
+					)
+					
+					.accessibilityLabel("Partagez ici vos impressions sur cette pièce")
+				if userComment.isEmpty {
+					Text("Partagez ici vos impressions sur cette pièce")
+						.foregroundColor(.gray)
+						.background(
+							horizontalSizeClass == .compact
+							? Color.clear
+							: Color("Background")
+						)
+						.font(.system(size: 14))
+						.padding(.horizontal, 14)
+						.padding(.top, 12)
+						.allowsHitTesting(false)
+				}
+			}
+			.padding(.top, 15)
+
+			Button("Publier") {
+				guard !userComment.isEmpty else { return }
+				viewModel.addComment(for: product.id, author: "Marion", text: userComment)
+				userComment = ""
+			}
+			.padding()
+			.frame(maxWidth: .infinity)
+			.background(Color.gray)
+			.foregroundColor(.white)
+			.cornerRadius(8)
+			
+			sectionLikesUtilisateur
+			
+			VStack {
+				let comments = viewModel.commentsByProduct[product.id] ?? []
+				if comments.isEmpty {
+					Text("Aucun commentaire partagé pour l'instant")
+						.foregroundColor(.gray)
+						.padding()
+				} else {
+					ScrollView {
+						LazyVStack(alignment: .leading, spacing: 10) {
+							ForEach(comments) { comment in
+								VStack(alignment: .leading) {
+									Text(comment.author)
+										.font(.headline)
+									Text(comment.text)
+									Text(comment.date, style: .date)
+										.font(.caption)
+										.foregroundColor(.gray)
+								}
+								.padding(.vertical, 5)
+							}
+						}
+						.padding(.horizontal, 20)
+					}
+					.frame(maxHeight: 300) // tu peux ajuster la hauteur
+				}
 			}
 		}
 		.padding(.horizontal, 20)
-		.padding(.top, 15)
 	}
 	
 	private var sectionLikesUtilisateur: some View {
 		HStack {
 			RoundedRectangle(cornerRadius: 20)
-				.fill(horizontalSizeClass == .regular ?
-					  Color.white : Color.gray.opacity(0.2))
+				.fill(
+						horizontalSizeClass == .regular
+						? Color.white
+						: (colorScheme == .dark ? Color.white : Color.gray.opacity(0.2))
+					)
 				.frame(width:CGFloat(77), height:CGFloat(37))
 				.overlay(
 					HStack(spacing: 5) {

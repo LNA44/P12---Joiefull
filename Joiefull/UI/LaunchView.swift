@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LaunchView: View {
 	//MARK: -Public properties
+	@Environment(\.colorScheme) var colorScheme
 	@State private var isActive = false
 	
 	//MARK: -Body
@@ -28,7 +29,6 @@ struct LaunchView: View {
 				Spacer()
 				
 				ProgressView()
-					.progressViewStyle(CircularProgressViewStyle())
 					.padding(.bottom, 40)
 					.accessibilityLabel("Chargement en cours")
 				

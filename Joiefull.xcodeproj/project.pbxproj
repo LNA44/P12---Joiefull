@@ -30,6 +30,8 @@
 		F3789E8F2E424E5E00B682D6 /* IphoneHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3789E8E2E424E5E00B682D6 /* IphoneHomeView.swift */; };
 		F38F71B52E3A669D00AD39BA /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F71B42E3A669D00AD39BA /* LaunchView.swift */; };
 		F38F71B82E3A6A8F00AD39BA /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F71B72E3A6A8F00AD39BA /* DetailsView.swift */; };
+		F3921F9C2E4CA4CD000BA1EA /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3921F9B2E4CA4CD000BA1EA /* Comment.swift */; };
+		F3921FA02E4CBF75000BA1EA /* DetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3921F9F2E4CBF75000BA1EA /* DetailsViewModelTests.swift */; };
 		F3C77E6B2E4B94B200A8C961 /* FavoriteViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E652E4B94B200A8C961 /* FavoriteViewModelTests.swift */; };
 		F3C77E6C2E4B94B200A8C961 /* JoiefullRepositoryDataMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E662E4B94B200A8C961 /* JoiefullRepositoryDataMock.swift */; };
 		F3C77E6D2E4B94B200A8C961 /* JoiefullRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E672E4B94B200A8C961 /* JoiefullRepositoryTests.swift */; };
@@ -78,6 +80,8 @@
 		F3789E8E2E424E5E00B682D6 /* IphoneHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneHomeView.swift; sourceTree = "<group>"; };
 		F38F71B42E3A669D00AD39BA /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		F38F71B72E3A6A8F00AD39BA /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		F3921F9B2E4CA4CD000BA1EA /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		F3921F9F2E4CBF75000BA1EA /* DetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModelTests.swift; sourceTree = "<group>"; };
 		F3C77E652E4B94B200A8C961 /* FavoriteViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModelTests.swift; sourceTree = "<group>"; };
 		F3C77E662E4B94B200A8C961 /* JoiefullRepositoryDataMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullRepositoryDataMock.swift; sourceTree = "<group>"; };
 		F3C77E672E4B94B200A8C961 /* JoiefullRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullRepositoryTests.swift; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				F30898A92E39141400836434 /* Product.swift */,
+				F3921F9B2E4CA4CD000BA1EA /* Comment.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				F3C77E692E4B94B200A8C961 /* RatingsViewModelTests.swift */,
 				F3C77E782E4BA3AD00A8C961 /* HomeViewModelTests.swift */,
 				F3C77E7A2E4BA41600A8C961 /* JoiefullRepositoryMock.swift */,
+				F3921F9F2E4CBF75000BA1EA /* DetailsViewModelTests.swift */,
 			);
 			path = VMTests;
 			sourceTree = "<group>";
@@ -379,6 +385,7 @@
 				F30898A32E390F7700836434 /* Constants.swift in Sources */,
 				F308993A2E3925F100836434 /* CategoryRow.swift in Sources */,
 				F308993C2E3928ED00836434 /* CategoryItem.swift in Sources */,
+				F3921F9C2E4CA4CD000BA1EA /* Comment.swift in Sources */,
 				F34A0C0A2E3B969A0098584B /* AsyncImageView.swift in Sources */,
 				F3789E2D2E41FED000B682D6 /* RatingsMock.swift in Sources */,
 				F30898B22E391F5000836434 /* HomeViewModel.swift in Sources */,
@@ -397,6 +404,7 @@
 				F3C77E792E4BA3AD00A8C961 /* HomeViewModelTests.swift in Sources */,
 				F3C77E6D2E4B94B200A8C961 /* JoiefullRepositoryTests.swift in Sources */,
 				F3C77E772E4B9ADC00A8C961 /* JoiefullAPIServiceMock.swift in Sources */,
+				F3921FA02E4CBF75000BA1EA /* DetailsViewModelTests.swift in Sources */,
 				F3C77E6E2E4B94B200A8C961 /* MockURLProtocol.swift in Sources */,
 				F3C77E6F2E4B94B200A8C961 /* RatingsViewModelTests.swift in Sources */,
 			);

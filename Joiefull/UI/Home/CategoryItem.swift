@@ -12,6 +12,7 @@ struct CategoryItem: View {
 	@EnvironmentObject var ratingsVM: RatingsViewModel
 	@EnvironmentObject var favoriteVM: FavoriteViewModel
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
+	@Environment(\.colorScheme) var colorScheme
 	var isSelected = false
 	var product: Product
 	
@@ -129,7 +130,10 @@ struct CategoryItem: View {
 			
 			Spacer()
 			Text(String("\(String(format: "%.0f", product.originalPrice))€"))
-				.strikethrough(true, color: isSelected ? Color("SelectedItem") : Color.black.opacity(0.8))
+				.strikethrough(true, color: isSelected
+					? Color("SelectedItem")
+					: (colorScheme == .dark ? Color.black : Color.black.opacity(0.8))
+				)
 				.foregroundColor(isSelected ? Color("SelectedItem") : Color.primary)
 				.font(.system(
 					size: horizontalSizeClass == .compact ? 14 : 18,
