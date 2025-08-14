@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FakeJoiefullRepository: JoiefullRepositoryProtocol {
+class PreviewJoiefullRepository: JoiefullRepositoryProtocol {
 	
 	enum ProductSet {
 		case oneProduct

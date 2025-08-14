@@ -130,10 +130,7 @@ struct CategoryItem: View {
 			
 			Spacer()
 			Text(String("\(String(format: "%.0f", product.originalPrice))€"))
-				.strikethrough(true, color: isSelected
-					? Color("SelectedItem")
-					: (colorScheme == .dark ? Color.black : Color.black.opacity(0.8))
-				)
+				.strikethrough(true, color: colorScheme == .dark ? Color.white : Color.black.opacity(0.8))
 				.foregroundColor(isSelected ? Color("SelectedItem") : Color.primary)
 				.font(.system(
 					size: horizontalSizeClass == .compact ? 14 : 18,

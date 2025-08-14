@@ -23,6 +23,7 @@ struct DetailsView: View {
 	@State private var showShareSheet = false
 	@State private var sharingComment: String = ""
 	@State private var imageSize: CGSize = .zero
+	@FocusState private var isCommentFocused: Bool
 	
 	//MARK: -Initialization
 	init(product: Product) {
@@ -74,6 +75,9 @@ struct DetailsView: View {
 			.onAppear {
 				favoriteVM.setInitialLikes(for: product.id, count: product.likes) //nombre de likes au départ = ceux reçu par l'API
 			}
+			.onTapGesture { // 🔹 quand on tape en dehors du TextEditor le clavier est retiré
+				isCommentFocused = false
+			}
 		}
 	}
 	
@@ -91,8 +95,11 @@ struct DetailsView: View {
 									}
 							}
 						)
+					
 						.onTapGesture {
-							isImageFullscreen = true
+							if !isCommentFocused {
+								isImageFullscreen = true
+							}
 						}
 						.accessibilityLabel(product.picture.description)
 						.accessibilityAddTraits(.isImage)
@@ -229,6 +236,7 @@ struct DetailsView: View {
 		VStack {
 			ZStack(alignment: .topLeading) {
 				TextEditor(text: $userComment)
+					.focused($isCommentFocused)
 					.scrollContentBackground(.hidden)
 					.background(
 						horizontalSizeClass == .compact
@@ -241,7 +249,6 @@ struct DetailsView: View {
 					.overlay(
 						RoundedRectangle(cornerRadius: 8)
 							.stroke(Color.gray.opacity(0.5), lineWidth: 1)
-							.allowsHitTesting(false)
 							.background(Color.clear)
 					)
 					
@@ -257,7 +264,6 @@ struct DetailsView: View {
 						.font(.system(size: 14))
 						.padding(.horizontal, 14)
 						.padding(.top, 12)
-						.allowsHitTesting(false)
 				}
 			}
 			.padding(.top, 15)

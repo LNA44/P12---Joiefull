@@ -41,7 +41,7 @@
 		F3C77E772E4B9ADC00A8C961 /* JoiefullAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E762E4B9ADC00A8C961 /* JoiefullAPIServiceMock.swift */; };
 		F3C77E792E4BA3AD00A8C961 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E782E4BA3AD00A8C961 /* HomeViewModelTests.swift */; };
 		F3C77E7B2E4BA41600A8C961 /* JoiefullRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C77E7A2E4BA41600A8C961 /* JoiefullRepositoryMock.swift */; };
-		F3D39EF72E49EFF400233D40 /* FakeJoiefullRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D39EF62E49EFF400233D40 /* FakeJoiefullRepository.swift */; };
+		F3D39EF72E49EFF400233D40 /* PreviewJoiefullRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D39EF62E49EFF400233D40 /* PreviewJoiefullRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,7 +91,7 @@
 		F3C77E762E4B9ADC00A8C961 /* JoiefullAPIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullAPIServiceMock.swift; sourceTree = "<group>"; };
 		F3C77E782E4BA3AD00A8C961 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		F3C77E7A2E4BA41600A8C961 /* JoiefullRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullRepositoryMock.swift; sourceTree = "<group>"; };
-		F3D39EF62E49EFF400233D40 /* FakeJoiefullRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeJoiefullRepository.swift; sourceTree = "<group>"; };
+		F3D39EF62E49EFF400233D40 /* PreviewJoiefullRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewJoiefullRepository.swift; sourceTree = "<group>"; };
 		F3F415972E464BDD004643C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,7 +143,7 @@
 		F308989D2E390EFA00836434 /* Joiefull */ = {
 			isa = PBXGroup;
 			children = (
-				F3D39EFA2E49F13700233D40 /* FakeVersions */,
+				F3D39EFA2E49F13700233D40 /* PreviewVersions */,
 				F3F415972E464BDD004643C7 /* Info.plist */,
 				F30898992E390EFA00836434 /* Model */,
 				F308989A2E390EFA00836434 /* Assets.xcassets */,
@@ -253,12 +253,12 @@
 			path = APIServiceTests;
 			sourceTree = "<group>";
 		};
-		F3D39EFA2E49F13700233D40 /* FakeVersions */ = {
+		F3D39EFA2E49F13700233D40 /* PreviewVersions */ = {
 			isa = PBXGroup;
 			children = (
-				F3D39EF62E49EFF400233D40 /* FakeJoiefullRepository.swift */,
+				F3D39EF62E49EFF400233D40 /* PreviewJoiefullRepository.swift */,
 			);
-			path = FakeVersions;
+			path = PreviewVersions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,7 +381,7 @@
 				F30898A72E39124500836434 /* JoiefullAPIService.swift in Sources */,
 				F38F71B82E3A6A8F00AD39BA /* DetailsView.swift in Sources */,
 				F30898F52E3923C100836434 /* APIError.swift in Sources */,
-				F3D39EF72E49EFF400233D40 /* FakeJoiefullRepository.swift in Sources */,
+				F3D39EF72E49EFF400233D40 /* PreviewJoiefullRepository.swift in Sources */,
 				F30898A32E390F7700836434 /* Constants.swift in Sources */,
 				F308993A2E3925F100836434 /* CategoryRow.swift in Sources */,
 				F308993C2E3928ED00836434 /* CategoryItem.swift in Sources */,
