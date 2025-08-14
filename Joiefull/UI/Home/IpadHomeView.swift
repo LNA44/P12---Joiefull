@@ -55,7 +55,7 @@ struct IpadHomeView: View {
 struct IpadHomeView_Previews: PreviewProvider {
 	static var previews: some View {
 		GeometryReader { geometry in
-			let fakeRepository = FakeJoiefullRepository(productSet: .twoProducts)
+			let fakeRepository = PreviewJoiefullRepository(productSet: .twoProducts)
 			let fakeViewModel = HomeViewModel(repository: fakeRepository)
 			
 			IpadHomeView(viewModel: fakeViewModel, geometry: geometry)

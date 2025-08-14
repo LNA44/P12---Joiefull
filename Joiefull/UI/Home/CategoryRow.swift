@@ -39,6 +39,7 @@ struct CategoryRow: View {
 						productView(for: product)
 							.accessibilityElement(children: .ignore)
 							.accessibilityLabel("Produit \(product.name), note moyenne\(String(format: "%.1f", ratingsVM.getAverage(for: product.id))) sur 5 étoiles, prix réduit \(String(format: "%.0f", product.price)) euros, prix d'origine \(String(format: "%.0f", product.originalPrice)) euros. Le produit a été aimé par \(product.likes) d'utilisateurs.")
+							.accessibilityAddTraits(.isButton)
 					}
 					
 				}

@@ -63,27 +63,22 @@ struct CategoryItem: View {
 	
 	private var favoriteButton: some View {
 		ZStack {
-			Button (action: {
-			}) {
-				RoundedRectangle(cornerRadius: 20)
-					.fill(Color.white)
-					.frame(width:CGFloat(51), height:CGFloat(27))
-					.offset(x: horizontalSizeClass == .compact ? 80 : 90, y: horizontalSizeClass == .compact ? 75 : 95)
-					.accessibilityHidden(true)
-				
-				HStack(spacing: 5) {
-					Image(systemName: favoriteVM.isFavorite(product.id) ? "heart.fill" : "heart")
-						.frame(width: CGFloat(14))
-						.foregroundColor(.black)
-						.accessibilityHidden(true)
-					
-					Text("\(favoriteVM.likesCount(for: product.id))")
-						.font(.system(size: CGFloat(14), weight: .semibold, design: .default))
-						.foregroundColor(.black)
-						.accessibilityHidden(true)
-				}
-				.offset(x: horizontalSizeClass == .compact ? 28 : 39,  y: horizontalSizeClass == .compact ? 75 : 95)
+			RoundedRectangle(cornerRadius: 20)
+				.fill(Color.white)
+				.frame(width: 51, height: 27)
+				.offset(x: horizontalSizeClass == .compact ? 60 : 70,
+						y: horizontalSizeClass == .compact ? 75 : 100)
+			HStack(spacing: 5) {
+				Image(systemName: favoriteVM.isFavorite(product.id) ? "heart.fill" : "heart")
+					.frame(width: 14)
+					.foregroundColor(.black)
+				Text("\(favoriteVM.likesCount(for: product.id))")
+					.font(.system(size: 14, weight: .semibold))
+					.foregroundColor(.black)
 			}
+			.offset(x: horizontalSizeClass == .compact ? 60 : 70,
+					y: horizontalSizeClass == .compact ? 75 : 100)
+			
 		}
 	}
 	

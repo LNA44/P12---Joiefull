@@ -75,7 +75,7 @@ struct DetailsView: View {
 			.onAppear {
 				favoriteVM.setInitialLikes(for: product.id, count: product.likes) //nombre de likes au départ = ceux reçu par l'API
 			}
-			.onTapGesture { // 🔹 quand on tape en dehors du TextEditor le clavier est retiré
+			.onTapGesture { // quand on tape en dehors du TextEditor le clavier est retiré
 				isCommentFocused = false
 			}
 		}
@@ -102,6 +102,7 @@ struct DetailsView: View {
 							}
 						}
 						.accessibilityLabel(product.picture.description)
+						.accessibilityHint("Afficher en plein écran")
 						.accessibilityAddTraits(.isImage)
 					
 						.overlay(alignment: .bottomTrailing) {
@@ -124,6 +125,13 @@ struct DetailsView: View {
 	private func boutonFavori(imageWidth: CGFloat, imageHeight: CGFloat) -> some View {
 		Button (action: {
 			favoriteVM.toggleFavorite(for: product.id)
+			
+			DispatchQueue.main.async { //annonce du changement de statut par VoiceOver
+				UIAccessibility.post(
+					notification: .announcement,
+					argument: favoriteVM.isFavorite(product.id) ? "Ajouté aux favoris" : "Retiré des favoris"
+				)
+			}
 		}) {
 			RoundedRectangle(cornerRadius: 20)
 				.fill(Color.white)
@@ -145,7 +153,12 @@ struct DetailsView: View {
 							.foregroundColor(.black)
 					}
 				)
+			
 		}
+		.accessibilitySortPriority(2)
+		.accessibilityLabel("Favori")
+		.accessibilityValue(favoriteVM.isFavorite(product.id) ? "Activé" : "Désactivé")
+		.accessibilityHint(favoriteVM.isFavorite(product.id) ? "Retirer des favoris" : "Ajouter aux favoris")
 	}
 	
 	private func boutonPartager(imageWidth: CGFloat, imageHeight: CGFloat) -> some View {
@@ -156,10 +169,17 @@ struct DetailsView: View {
 		}
 		.padding(.top, imageWidth * 0.05)
 		.padding(.trailing, imageHeight * 0.06)
-		.accessibilityLabel("Partager ce produit")
-		.accessibilityAddTraits(.isButton)
-		.accessibilityHint("Ouvre les options de partage")
-		.sheet(isPresented: $showShareSheet) {
+		.accessibilitySortPriority(1)
+		.accessibilityLabel("Partager")
+		.accessibilityHint("Ouvrir les options de partage")
+		.sheet(isPresented: $showShareSheet, onDismiss: {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+				UIAccessibility.post(
+					notification: .announcement,
+					argument: "Produit partagé"
+				)
+			}
+		}) {
 			ShareSheet(productImageURL: product.picture.url, defaultComment: "Regarde ce produit !", isPresented: $showShareSheet)
 		}
 	}
@@ -178,6 +198,7 @@ struct DetailsView: View {
 			}
 		}
 		.accessibilityElement()
+		.accessibilitySortPriority(4)
 		.accessibilityLabel("\(product.name) noté \(String(format: "%.1f", ratingsVM.getAverage(for: product.id))) étoiles")
 	}
 	
@@ -195,6 +216,7 @@ struct DetailsView: View {
 		}
 		.padding(.horizontal, 20)
 		.accessibilityElement()
+		.accessibilitySortPriority(3)
 		.accessibilityLabel("Prix réduit : \(String(format: "%.0f", product.price)) euros; prix d'origine : \(String(format: "%.0f", product.originalPrice)) euros")
 	}
 	
@@ -225,7 +247,10 @@ struct DetailsView: View {
 				}
 			))
 			.padding(.bottom, 5)
-			.accessibilityLabel("Note de l'utilisateur de 1 à 5 étoiles: \(ratingsVM.getUserRating(for: product.id))")
+			.accessibilityElement(children: .ignore)
+			.accessibilityLabel("Note")
+			.accessibilityValue(String(format: "%.1f sur 5", ratingsVM.getUserRating(for: product.id)))
+			
 			Spacer()
 		}
 		.padding(.horizontal, 20)
@@ -251,8 +276,8 @@ struct DetailsView: View {
 							.stroke(Color.gray.opacity(0.5), lineWidth: 1)
 							.background(Color.clear)
 					)
-					
-					.accessibilityLabel("Partagez ici vos impressions sur cette pièce")
+					.accessibilityLabel("Commentaire")
+					.accessibilityHint("Saisir un commentaire à partager")
 				if userComment.isEmpty {
 					Text("Partagez ici vos impressions sur cette pièce")
 						.foregroundColor(.gray)
@@ -309,6 +334,17 @@ struct DetailsView: View {
 			}
 		}
 		.padding(.horizontal, 20)
+		.toolbar {
+			ToolbarItemGroup(placement: .keyboard) { //ajoute un bouton pour replier le clavier
+				Button {
+					isCommentFocused = false
+				} label: {
+					Label("Replier le clavier", systemImage: "keyboard.chevron.compact.down")
+				}
+				Spacer()
+				Button("Terminé") { isCommentFocused = false }
+			}
+		}
 	}
 	
 	private var sectionLikesUtilisateur: some View {
@@ -335,8 +371,8 @@ struct DetailsView: View {
 		}
 		.padding(.leading, 50)
 		.padding(.top, 10)
-		.accessibilityElement()
-		.accessibilityLabel("Vous avez liké \(favoriteVM.userLikesCount()) produits")
+		.accessibilityLabel("Nombre de mentions J’aime")
+		.accessibilityValue("\(favoriteVM.userLikesCount())")
 	}
 }
 
