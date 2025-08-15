@@ -92,7 +92,7 @@
 		F3C77E782E4BA3AD00A8C961 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		F3C77E7A2E4BA41600A8C961 /* JoiefullRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiefullRepositoryMock.swift; sourceTree = "<group>"; };
 		F3D39EF62E49EFF400233D40 /* PreviewJoiefullRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewJoiefullRepository.swift; sourceTree = "<group>"; };
-		F3F415972E464BDD004643C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F3F415972E464BDD004643C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +118,7 @@
 			children = (
 				F308989D2E390EFA00836434 /* Joiefull */,
 				F30898302E39083A00836434 /* Products */,
+				F3C77E6A2E4B94B200A8C961 /* JoiefullTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,13 +144,12 @@
 		F308989D2E390EFA00836434 /* Joiefull */ = {
 			isa = PBXGroup;
 			children = (
+				F37336712E4F403C008F948A /* Utils */,
+				F37336702E4F4004008F948A /* App */,
+				F373366F2E4F3FD4008F948A /* Resources */,
 				F3D39EFA2E49F13700233D40 /* PreviewVersions */,
-				F3F415972E464BDD004643C7 /* Info.plist */,
 				F30898992E390EFA00836434 /* Model */,
-				F308989A2E390EFA00836434 /* Assets.xcassets */,
-				F308989C2E390EFA00836434 /* JoiefullApp.swift */,
-				F30898A22E390F7700836434 /* Constants.swift */,
-				F30898A42E39115D00836434 /* UI */,
+				F30898A42E39115D00836434 /* Features */,
 			);
 			path = Joiefull;
 			sourceTree = "<group>";
@@ -164,29 +164,23 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		F30898A42E39115D00836434 /* UI */ = {
+		F30898A42E39115D00836434 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				F37336692E4F3EDF008F948A /* Shared */,
 				F38F71B62E3A6A8300AD39BA /* Details */,
 				F30898A52E39117400836434 /* Home */,
 				F38F71B42E3A669D00AD39BA /* LaunchView.swift */,
 				F34A0C092E3B969A0098584B /* AsyncImageView.swift */,
-				F3789E302E420D7300B682D6 /* RatingsVM.swift */,
-				F3789E322E4226BF00B682D6 /* FavoriteVM.swift */,
-				F3C77E6A2E4B94B200A8C961 /* JoiefullTests */,
 			);
-			path = UI;
+			path = Features;
 			sourceTree = "<group>";
 		};
 		F30898A52E39117400836434 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				F308989B2E390EFA00836434 /* HomeView.swift */,
-				F3789E8C2E424E4F00B682D6 /* IpadHomeView.swift */,
-				F3789E8E2E424E5E00B682D6 /* IphoneHomeView.swift */,
-				F30898B12E391F5000836434 /* HomeViewModel.swift */,
-				F30899392E3925F100836434 /* CategoryRow.swift */,
-				F308993B2E3928ED00836434 /* CategoryItem.swift */,
+				F373366E2E4F3F3B008F948A /* ViewModels */,
+				F373366D2E4F3F36008F948A /* Views */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -200,14 +194,92 @@
 			path = DataModel;
 			sourceTree = "<group>";
 		};
-		F38F71B62E3A6A8300AD39BA /* Details */ = {
+		F37336692E4F3EDF008F948A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				F373366A2E4F3EEA008F948A /* ViewModels */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		F373366A2E4F3EEA008F948A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F3789E322E4226BF00B682D6 /* FavoriteVM.swift */,
+				F3789E302E420D7300B682D6 /* RatingsVM.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F373366B2E4F3F14008F948A /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F38F71B72E3A6A8F00AD39BA /* DetailsView.swift */,
-				F33AA0342E3CED6600E68245 /* DetailsViewModel.swift */,
 				F34A0C0D2E3BC5D50098584B /* StarRatingView.swift */,
 				F34A0C0B2E3BC3A80098584B /* FullscreenImageView.swift */,
 				F33AA0322E3CEA8300E68245 /* ShareSheet.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F373366C2E4F3F2B008F948A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F33AA0342E3CED6600E68245 /* DetailsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F373366D2E4F3F36008F948A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F308989B2E390EFA00836434 /* HomeView.swift */,
+				F3789E8C2E424E4F00B682D6 /* IpadHomeView.swift */,
+				F3789E8E2E424E5E00B682D6 /* IphoneHomeView.swift */,
+				F30899392E3925F100836434 /* CategoryRow.swift */,
+				F308993B2E3928ED00836434 /* CategoryItem.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F373366E2E4F3F3B008F948A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F30898B12E391F5000836434 /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F373366F2E4F3FD4008F948A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F308989A2E390EFA00836434 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F37336702E4F4004008F948A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F3F415972E464BDD004643C7 /* Info.plist */,
+				F308989C2E390EFA00836434 /* JoiefullApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F37336712E4F403C008F948A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F30898A22E390F7700836434 /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F38F71B62E3A6A8300AD39BA /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				F373366C2E4F3F2B008F948A /* ViewModels */,
+				F373366B2E4F3F14008F948A /* Views */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -473,6 +545,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Joiefull/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -530,6 +603,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Joiefull/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -550,7 +624,7 @@
 				DEVELOPMENT_TEAM = 64KCF3XZ6R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Joiefull/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Joiefull/App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -579,7 +653,7 @@
 				DEVELOPMENT_TEAM = 64KCF3XZ6R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Joiefull/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Joiefull/App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
