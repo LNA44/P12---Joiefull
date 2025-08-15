@@ -38,10 +38,10 @@ struct IphoneHomeView: View {
 struct IphoneHomeView_Previews: PreviewProvider {
 	static var previews: some View {
 		GeometryReader { geometry in
-			let fakeRepository = PreviewJoiefullRepository(productSet: .twoProducts)
-			let fakeViewModel = HomeViewModel(repository: fakeRepository)
+			let previewRepository = PreviewJoiefullRepository(productSet: .twoProducts)
+			let previewViewModel = HomeViewModel(repository: previewRepository)
 			
-			IphoneHomeView(viewModel: fakeViewModel)
+			IphoneHomeView(viewModel: previewViewModel)
 				.environmentObject(RatingsViewModel())
 				.environmentObject(FavoriteViewModel())
 		}

@@ -12,9 +12,9 @@ struct DetailsView: View {
 	var product: Product
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
 	@Environment(\.colorScheme) var colorScheme //définit les couleurs pour modes clair et sombre
-	@StateObject var viewModel: DetailsViewModel
 	@EnvironmentObject var ratingsVM: RatingsViewModel
 	@EnvironmentObject var favoriteVM: FavoriteViewModel
+	@EnvironmentObject var viewModel: DetailsViewModel
 	
 	//MARK: -Private properties
 	@Environment(\.dismiss) private var dismiss  // Pour fermer la vue
@@ -27,7 +27,6 @@ struct DetailsView: View {
 	
 	//MARK: -Initialization
 	init(product: Product) {
-		_viewModel = StateObject(wrappedValue: DetailsViewModel())
 		self.product = product
 	}
 	
@@ -137,7 +136,7 @@ struct DetailsView: View {
 				.fill(Color.white)
 				.frame(
 					width: horizontalSizeClass == .compact ? 78 : 89,
-					height: horizontalSizeClass == .compact ? 35 : 45
+					height: horizontalSizeClass == .compact ? 44 : 45
 				)
 				.overlay(
 					HStack(spacing: 5) {
@@ -399,6 +398,7 @@ struct DetailsView_Previews: PreviewProvider {
 	
 	static let favoriteVM = FavoriteViewModel()
 	
+	static let viewModel = DetailsViewModel()
 	static var previews: some View {
 		NavigationStack { //utile pour afficher bouton retour, vérifier que navigationbar cachée,...
 			DetailsView(product: fakeProduct)

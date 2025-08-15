@@ -12,6 +12,7 @@ struct HomeView: View {
 	@StateObject var viewModel: HomeViewModel
 	@StateObject var ratingsVM = RatingsViewModel()
 	@StateObject var favoriteVM = FavoriteViewModel()
+	@StateObject var detailsVM = DetailsViewModel()
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
 	@AccessibilityFocusState private var isFocused: Bool
 	
@@ -44,6 +45,7 @@ struct HomeView: View {
 		}
 		.environmentObject(ratingsVM)
 		.environmentObject(favoriteVM)
+		.environmentObject(detailsVM)
 		.alert(isPresented: $viewModel.showAlert) {
 			Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? ""), dismissButton: .default(Text("OK")))
 		}
