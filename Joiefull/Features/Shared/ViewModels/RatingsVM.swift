@@ -28,9 +28,8 @@ class RatingsViewModel: ObservableObject {
 			}
 		} else {
 			// Premier vote: ajouter la note
-			allRatings[productId, default: []].append(rating) 
+			allRatings[productId, default: []].append(rating)
 		}
-		
 		// Mettre à jour (ou enregistrer) le vote de l'utilisateur
 		userRatings[productId] = rating
 	}

@@ -29,7 +29,7 @@ struct HomeView: View {
 	//MARK: -Body
 	var body: some View {
 		NavigationStack {
-			// iPad : Split View
+			// iPad : Vue splitée
 			if horizontalSizeClass == .regular {
 				GeometryReader { geometry in
 					IpadHomeView(viewModel: viewModel, detailsViewModel: detailsVM, geometry: geometry)

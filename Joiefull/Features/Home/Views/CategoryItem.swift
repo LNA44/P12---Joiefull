@@ -78,7 +78,6 @@ struct CategoryItem: View {
 			}
 			.offset(x: horizontalSizeClass == .compact ? 60 : 70,
 					y: horizontalSizeClass == .compact ? 75 : 100)
-			
 		}
 	}
 	
@@ -96,7 +95,9 @@ struct CategoryItem: View {
 					.lineLimit(nil)       // aucune limite de lignes
 					.fixedSize(horizontal: false, vertical: true)
 			}
+			
 			Spacer()
+			
 			HStack(spacing: 2) {
 				Image(systemName: "star.fill")
 					.foregroundColor(.orange)
@@ -116,7 +117,7 @@ struct CategoryItem: View {
 	
 	var productPrice: some View {
 		HStack {
-			Text("\(String(format: "%.0f", product.price))€") //arrondi 0 chiffres après la virgule
+			Text("\(String(format: "%.0f", product.price))€") //arrondi 0 chiffre après la virgule
 				.foregroundColor(isSelected ? Color("SelectedItem") : Color.primary)
 				.font(.system(
 					size: horizontalSizeClass == .compact ? 14 : 18,

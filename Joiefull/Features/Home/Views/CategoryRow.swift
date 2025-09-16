@@ -43,7 +43,6 @@ struct CategoryRow: View {
 							.accessibilityLabel("Produit \(product.name), note moyenne\(String(format: "%.1f", ratingsVM.getAverage(for: product.id))) sur 5 étoiles, prix réduit \(String(format: "%.0f", product.price)) euros, prix d'origine \(String(format: "%.0f", product.originalPrice)) euros. Le produit a été aimé par \(product.likes) d'utilisateurs.")
 							.accessibilityAddTraits(.isButton)
 					}
-					
 				}
 			}
 			.frame(height: horizontalSizeClass == .compact ? 300 : 330) //hauteur du rose
@@ -51,7 +50,7 @@ struct CategoryRow: View {
 		.padding(.leading, 15)
 	}
 	
-	@ViewBuilder
+	@ViewBuilder // fusionne les someView en une seul View (button et NavigationLink)
 	private func productView(for product: Product) -> some View {
 		if horizontalSizeClass == .compact {
 			//iPhone: navigation
@@ -62,7 +61,6 @@ struct CategoryRow: View {
 			) {
 				CategoryItem(product: product)
 					.frame(maxHeight: .infinity, alignment: .top)
-				
 			}
 			.buttonStyle(PlainButtonStyle())
 		} else {
@@ -76,7 +74,6 @@ struct CategoryRow: View {
 			}
 			.buttonStyle(PlainButtonStyle())
 		}
-		
 	}
 }
 
