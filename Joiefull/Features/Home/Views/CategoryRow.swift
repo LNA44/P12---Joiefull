@@ -12,15 +12,17 @@ struct CategoryRow: View {
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
 	@EnvironmentObject var ratingsVM: RatingsViewModel
 	@EnvironmentObject var favoriteVM: FavoriteViewModel
+	@ObservedObject var detailsViewModel: DetailsViewModel
 	var categoryName: String
 	var items: [Product] = []
 	var selectedProduct: Binding<Product?>? //afficher la vue detail sur ipad sans naviguer (changer d'écran), optionnel pour n'être utilisé que sur iPad
 	
 	//MARK: -Initialization
-	init(categoryName: String = "", items: [Product] = [], selectedProduct: Binding<Product?>? = nil) {
+	init(categoryName: String = "", items: [Product] = [], selectedProduct: Binding<Product?>? = nil, detailsViewModel: DetailsViewModel) {
 		self.categoryName = categoryName
 		self.items = items
 		self.selectedProduct = selectedProduct
+		self.detailsViewModel = detailsViewModel
 	}
 	
 	//MARK: -Body
@@ -53,7 +55,7 @@ struct CategoryRow: View {
 	private func productView(for product: Product) -> some View {
 		if horizontalSizeClass == .compact {
 			//iPhone: navigation
-			NavigationLink(destination: DetailsView(product: product)
+			NavigationLink(destination: DetailsView(product: product, detailsViewModel: detailsViewModel)
 						   //.background(Color("Background"))
 				.environmentObject(ratingsVM)
 				.environmentObject(favoriteVM)
@@ -122,7 +124,7 @@ struct CategoryRow_Previews: PreviewProvider {
 	]
 	
 	static var previews: some View {
-		CategoryRow(categoryName: "Hauts", items: fakeProducts)
+		CategoryRow(categoryName: "Hauts", items: fakeProducts, detailsViewModel: DetailsViewModel())
 			.environmentObject(RatingsViewModel())  // utilise données ratingsMock par défaut
 			.environmentObject(FavoriteViewModel()) // idem pour favoris
 	}

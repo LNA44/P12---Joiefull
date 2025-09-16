@@ -10,12 +10,13 @@ import SwiftUI
 struct IphoneHomeView: View {
 	//MARK: -Public properties
 	@ObservedObject var viewModel: HomeViewModel //recoit le VM du parent
+	@ObservedObject var detailsViewModel: DetailsViewModel
 	
 	//MARK: -Body
 	var body: some View {
 		List {
 			ForEach(viewModel.categories.keys.sorted(), id: \.self) { key in
-				CategoryRow(categoryName: key, items: viewModel.categories[key] ?? [])
+				CategoryRow(categoryName: key, items: viewModel.categories[key] ?? [], detailsViewModel: detailsViewModel)
 				
 					.padding(.bottom, -10)
 					.padding(.top, -20)
@@ -41,7 +42,7 @@ struct IphoneHomeView_Previews: PreviewProvider {
 			let previewRepository = PreviewJoiefullRepository(productSet: .twoProducts)
 			let previewViewModel = HomeViewModel(repository: previewRepository)
 			
-			IphoneHomeView(viewModel: previewViewModel)
+			IphoneHomeView(viewModel: previewViewModel, detailsViewModel: DetailsViewModel())
 				.environmentObject(RatingsViewModel())
 				.environmentObject(FavoriteViewModel())
 		}

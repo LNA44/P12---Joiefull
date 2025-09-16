@@ -10,6 +10,7 @@ import SwiftUI
 struct IpadHomeView: View {
 	//MARK: -Public properties
 	@ObservedObject var viewModel: HomeViewModel //recoit le VM du parent
+	@ObservedObject var detailsViewModel: DetailsViewModel
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
 	var geometry: GeometryProxy
 	
@@ -23,7 +24,7 @@ struct IpadHomeView: View {
 			HStack(spacing: 0) {
 				List {
 					ForEach(viewModel.categories.keys.sorted(), id: \.self) { key in
-						CategoryRow(categoryName: key, items: viewModel.categories[key] ?? [], selectedProduct: $selectedProduct)
+						CategoryRow(categoryName: key, items: viewModel.categories[key] ?? [], selectedProduct: $selectedProduct, detailsViewModel: detailsViewModel)
 							.listRowBackground(Color.clear)
 					}
 					.frame(height: 390)
@@ -40,7 +41,7 @@ struct IpadHomeView: View {
 				.frame(width: selectedProduct == nil ? geometry.size.width : geometry.size.width * 0.6) // gauche 60%
 				VStack(alignment: .trailing) {
 					if let product = selectedProduct {
-						DetailsView(product: product)
+						DetailsView(product: product, detailsViewModel: detailsViewModel)
 					} else {
 						Text("Sélectionnez un produit")
 					}
@@ -58,7 +59,7 @@ struct IpadHomeView_Previews: PreviewProvider {
 		GeometryReader { geometry in
 			let previewRepository = PreviewJoiefullRepository(productSet: .twoProducts)
 			let previewViewModel = HomeViewModel(repository: previewRepository)
-			IpadHomeView(viewModel: previewViewModel, geometry: geometry)
+			IpadHomeView(viewModel: previewViewModel, detailsViewModel: DetailsViewModel(), geometry: geometry)
 				.environmentObject(RatingsViewModel())
 				.environmentObject(FavoriteViewModel())
 		}

@@ -14,7 +14,7 @@ struct DetailsView: View {
 	@Environment(\.colorScheme) var colorScheme //définit les couleurs pour modes clair et sombre
 	@EnvironmentObject var ratingsVM: RatingsViewModel
 	@EnvironmentObject var favoriteVM: FavoriteViewModel
-	@EnvironmentObject var viewModel: DetailsViewModel
+	@ObservedObject var detailsViewModel: DetailsViewModel
 	
 	//MARK: -Private properties
 	@Environment(\.dismiss) private var dismiss  // Pour fermer la vue
@@ -26,8 +26,9 @@ struct DetailsView: View {
 	@FocusState private var isCommentFocused: Bool
 	
 	//MARK: -Initialization
-	init(product: Product) {
+	init(product: Product, detailsViewModel: DetailsViewModel) {
 		self.product = product
+		self.detailsViewModel = detailsViewModel
 	}
 	
 	//MARK: -Body
@@ -294,7 +295,7 @@ struct DetailsView: View {
 
 			Button("Publier") {
 				guard !userComment.isEmpty else { return }
-				viewModel.addComment(for: product.id, author: "Marion", text: userComment)
+				detailsViewModel.addComment(for: product.id, author: "Marion", text: userComment)
 				userComment = ""
 			}
 			.padding()
@@ -306,7 +307,7 @@ struct DetailsView: View {
 			sectionLikesUtilisateur
 			
 			VStack {
-				let comments = viewModel.commentsByProduct[product.id] ?? []
+				let comments = detailsViewModel.commentsByProduct[product.id] ?? []
 				if comments.isEmpty {
 					Text("Aucun commentaire partagé pour l'instant")
 						.foregroundColor(.gray)
@@ -401,7 +402,7 @@ struct DetailsView_Previews: PreviewProvider {
 	static let viewModel = DetailsViewModel()
 	static var previews: some View {
 		NavigationStack { //utile pour afficher bouton retour, vérifier que navigationbar cachée,...
-			DetailsView(product: fakeProduct)
+			DetailsView(product: fakeProduct, detailsViewModel:viewModel)
 				.environmentObject(ratingsVM)
 				.environmentObject(favoriteVM)
 		}

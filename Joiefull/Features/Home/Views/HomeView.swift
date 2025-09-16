@@ -32,20 +32,19 @@ struct HomeView: View {
 			// iPad : Split View
 			if horizontalSizeClass == .regular {
 				GeometryReader { geometry in
-					IpadHomeView(viewModel: viewModel, geometry: geometry)
+					IpadHomeView(viewModel: viewModel, detailsViewModel: detailsVM, geometry: geometry)
 						.accessibilityFocused($isFocused)
 						.accessibilityLabel("Accueil iPad, liste des produits")
 				}
 			} else {
 				// iPhone : navigation vers la vue de détail
-				IphoneHomeView(viewModel: viewModel)
+				IphoneHomeView(viewModel: viewModel, detailsViewModel: detailsVM)
 					.accessibilityFocused($isFocused)
 					.accessibilityLabel("Accueil iPhone, liste des produits")
 			}
 		}
 		.environmentObject(ratingsVM)
 		.environmentObject(favoriteVM)
-		.environmentObject(detailsVM)
 		.alert(isPresented: $viewModel.showAlert) {
 			Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? ""), dismissButton: .default(Text("OK")))
 		}
