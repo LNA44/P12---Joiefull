@@ -49,8 +49,8 @@ extension Product.Picture {
 	}
 }
 
-extension Product { //permet de rendre Product conforme à Equatable pour comparer deux produits (utile dans CategoryRow pour vérifier si le produit a été sélectionné). Swift ne sait pas comparer les propriétés calculées + sous structures
-	static func == (lhs: Product, rhs: Product) -> Bool {
+extension Product { //permet de rendre Product conforme à Equatable pour comparer deux produits (utile dans CategoryRow pour vérifier si le produit a été sélectionné). Swift ne sait pas comparer les structure contenant des sous structures
+	static func == (lhs: Product, rhs: Product) -> Bool { //on indique comment comparer deux Products (leftandSide et rightHandSide)
 		return lhs.id == rhs.id &&
 			   lhs.name == rhs.name &&
 			   lhs.likes == rhs.likes &&

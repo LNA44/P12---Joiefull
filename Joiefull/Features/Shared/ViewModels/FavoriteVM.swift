@@ -26,7 +26,7 @@ class FavoriteViewModel: ObservableObject {
 			
 		} else {
 			userFavorites.insert(productId)
-			totalLikes[productId, default: 0] += 1
+			totalLikes[productId, default: 0] += 1 //default : si la clé liée au product n'existe pas encore alors 0, pas nil (car dico renvoie tjrs nil si clé n'existe pas sinon)
 		}
 	}
 	

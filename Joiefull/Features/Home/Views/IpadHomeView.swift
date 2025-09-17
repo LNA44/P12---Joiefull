@@ -42,9 +42,7 @@ struct IpadHomeView: View {
 				VStack(alignment: .trailing) {
 					if let product = selectedProduct {
 						DetailsView(product: product, detailsViewModel: detailsViewModel)
-					} else {
-						Text("Sélectionnez un produit")
-					}
+					} 
 				}
 				.frame(width: selectedProduct == nil ? geometry.size.width : geometry.size.width * 0.4) // droite 40%
 			}

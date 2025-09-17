@@ -35,7 +35,7 @@ struct JoiefullAPIService {
 		guard let httpResponse = response as? HTTPURLResponse else {
 			throw APIError.invalidResponse
 		}
-		guard httpResponse.statusCode == 200 else {
+		guard httpResponse.statusCode == Constants.HTTPStatus else {
 			throw APIError.httpError(statusCode: httpResponse.statusCode)
 		}
 		return data
@@ -53,7 +53,6 @@ struct JoiefullAPIService {
 			let responseJSON = try JSONDecoder().decode(T.self, from: data)
 			return responseJSON
 		} catch {
-			// Ici on attrape toutes les erreurs de décodage et on renvoie APIError.decodingError
 			throw APIError.decodingError
 		}
 	}

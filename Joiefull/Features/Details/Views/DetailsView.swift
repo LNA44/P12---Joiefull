@@ -153,7 +153,6 @@ struct DetailsView: View {
 							.foregroundColor(.black)
 					}
 				)
-			
 		}
 		.accessibilitySortPriority(2)
 		.accessibilityLabel("Favori")
@@ -257,7 +256,6 @@ struct DetailsView: View {
 	}
 	
 	private var sectionCommentaire: some View {
-
 		VStack {
 			ZStack(alignment: .topLeading) {
 				TextEditor(text: $userComment)
@@ -295,7 +293,7 @@ struct DetailsView: View {
 
 			Button("Publier") {
 				guard !userComment.isEmpty else { return }
-				detailsViewModel.addComment(for: product.id, author: "Marion", text: userComment)
+				detailsViewModel.addComment(for: product.id, author: Constants.userName, text: userComment)
 				userComment = ""
 			}
 			.padding()
@@ -367,6 +365,7 @@ struct DetailsView: View {
 							.foregroundColor(.black)
 					}
 				)
+			
 			Spacer()
 		}
 		.padding(.leading, 50)
