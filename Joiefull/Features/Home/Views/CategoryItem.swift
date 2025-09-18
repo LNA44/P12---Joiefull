@@ -137,7 +137,7 @@ struct CategoryItem: View {
 	}
 }
 
-//MARK: -Preview
+	//MARK: -Preview
 struct CategoryItem_Previews: PreviewProvider {
 	static var fakeProduct: Product =
 	Product(

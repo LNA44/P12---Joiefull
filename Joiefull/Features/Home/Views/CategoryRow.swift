@@ -45,7 +45,7 @@ struct CategoryRow: View {
 					}
 				}
 			}
-			.frame(height: horizontalSizeClass == .compact ? 300 : 330) //hauteur du rose
+			.frame(height: horizontalSizeClass == .compact ? 300 : 330) 
 		}
 		.padding(.leading, 15)
 	}
@@ -55,7 +55,6 @@ struct CategoryRow: View {
 		if horizontalSizeClass == .compact {
 			//iPhone: navigation
 			NavigationLink(destination: DetailsView(product: product, detailsViewModel: detailsViewModel)
-						   //.background(Color("Background"))
 				.environmentObject(ratingsVM)
 				.environmentObject(favoriteVM)
 			) {
@@ -77,7 +76,7 @@ struct CategoryRow: View {
 	}
 }
 
-//MARK: -Preview
+	//MARK: -Preview
 struct CategoryRow_Previews: PreviewProvider {
 	
 	// Mock Product

@@ -95,7 +95,6 @@ struct DetailsView: View {
 									}
 							}
 						)
-					
 						.onTapGesture {
 							if !isCommentFocused {
 								isImageFullscreen = true
@@ -375,7 +374,7 @@ struct DetailsView: View {
 	}
 }
 
-//MARK: -Preview
+	//MARK: -Preview
 struct DetailsView_Previews: PreviewProvider {
 	static let fakeProduct = Product(
 		id: 1,

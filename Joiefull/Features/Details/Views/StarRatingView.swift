@@ -31,7 +31,7 @@ struct StarRatingView: View {
 	}
 }
 
-//MARK: -Preview
+	//MARK: -Preview
 struct StarRatingView_Previews: PreviewProvider {
 	
 	@State static var previewRating: Double = 3.0

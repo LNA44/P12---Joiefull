@@ -10,6 +10,9 @@ import SwiftUI
 @main
 struct JoiefullApp: App {
 	@State private var showLaunchView = true
+	@StateObject var ratingsVM = RatingsViewModel()
+	@StateObject var favoriteVM = FavoriteViewModel()
+	@StateObject var detailsVM = DetailsViewModel()
 	
 	var body: some Scene {
 		WindowGroup {
@@ -24,7 +27,9 @@ struct JoiefullApp: App {
 						}
 					}
 			} else {
-				HomeView()
+				HomeView(detailsVM: detailsVM)
+					.environmentObject(ratingsVM)
+					.environmentObject(favoriteVM)
 			}
 		}
 	}

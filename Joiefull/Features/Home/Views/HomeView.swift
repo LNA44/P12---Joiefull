@@ -10,20 +10,19 @@ import SwiftUI
 struct HomeView: View {
 	//MARK: -Public properties
 	@StateObject var viewModel: HomeViewModel
-	@StateObject var ratingsVM = RatingsViewModel()
-	@StateObject var favoriteVM = FavoriteViewModel()
-	@StateObject var detailsVM = DetailsViewModel()
+	@ObservedObject var detailsVM: DetailsViewModel
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
 	@AccessibilityFocusState private var isFocused: Bool
 	
 	//MARK: -Initialization
-	init(viewModel: HomeViewModel? = nil) {
+	init(viewModel: HomeViewModel? = nil, detailsVM: DetailsViewModel) {
 		if let viewModel {
 			_viewModel = StateObject(wrappedValue: viewModel)
 		} else {
 			let repository = JoiefullRepository()
 			_viewModel = StateObject(wrappedValue: HomeViewModel(repository: repository))
 		}
+		self.detailsVM = detailsVM
 	}
 	
 	//MARK: -Body
@@ -43,8 +42,6 @@ struct HomeView: View {
 					.accessibilityLabel("Accueil iPhone, liste des produits")
 			}
 		}
-		.environmentObject(ratingsVM)
-		.environmentObject(favoriteVM)
 		.alert(isPresented: $viewModel.showAlert) {
 			Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? ""), dismissButton: .default(Text("OK")))
 		}
@@ -56,17 +53,17 @@ struct HomeView: View {
 	}
 }
 
-//MARK: -Preview
+	//MARK: -Preview
 struct HomeView_Previews: PreviewProvider {
 	
 	static var previews: some View {
 		Group {
 			// iPhone
-			HomeView(viewModel: HomeViewModel(repository: PreviewJoiefullRepository(productSet: .twoProducts)))
+			HomeView(viewModel: HomeViewModel(repository: PreviewJoiefullRepository(productSet: .twoProducts)), detailsVM: DetailsViewModel())
 				.previewDisplayName("iPhone")
 			
 			// iPad
-			HomeView(viewModel: HomeViewModel(repository: PreviewJoiefullRepository(productSet: .twoProducts)))
+			HomeView(viewModel: HomeViewModel(repository: PreviewJoiefullRepository(productSet: .twoProducts)), detailsVM: DetailsViewModel())
 				.previewDisplayName("iPad")
 		}
 	}

@@ -35,7 +35,7 @@ struct IphoneHomeView: View {
 	}
 }
 
-//MARK: -Preview
+	//MARK: -Preview
 struct IphoneHomeView_Previews: PreviewProvider {
 	static var previews: some View {
 		GeometryReader { geometry in

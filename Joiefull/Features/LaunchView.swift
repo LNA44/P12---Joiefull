@@ -10,43 +10,31 @@ import SwiftUI
 struct LaunchView: View {
 	//MARK: -Public properties
 	@Environment(\.colorScheme) var colorScheme
-	@State private var isActive = false
 	
 	//MARK: -Body
 	var body: some View {
-		if isActive {
-			HomeView()
-		} else {
-			VStack {
-				Spacer()
-				
-				Image("logo") 
-					.resizable()
-					.scaledToFit()
-					.frame(width: 150, height: 150)
-					.accessibilityHidden(true)
-				
-				Spacer()
-				
-				ProgressView()
-					.padding(.bottom, 40)
-					.accessibilityLabel("Chargement en cours")
-				
-			}
-			.frame(maxWidth: .infinity, maxHeight: .infinity)
-			.background(Color("MainColor"))
-			.onAppear {
-				DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-					withAnimation {
-						isActive = true
-					}
-				}
-			}
+		VStack {
+			Spacer()
+			
+			Image("logo")
+				.resizable()
+				.scaledToFit()
+				.frame(width: 150, height: 150)
+				.accessibilityHidden(true)
+			
+			Spacer()
+			
+			ProgressView()
+				.padding(.bottom, 40)
+				.accessibilityLabel("Chargement en cours")
+			
 		}
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.background(Color("MainColor"))
 	}
 }
 
-//MARK: -Preview
+	//MARK: -Preview
 #Preview {
 	LaunchView()
 }

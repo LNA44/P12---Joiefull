@@ -17,6 +17,7 @@ struct IpadHomeView: View {
 	//MARK: -Private properties
 	@State private var selectedProduct: Product? = nil
 	
+	//MARK: -Body
 	var body: some View {
 		ZStack {
 			Color("Background")
@@ -50,7 +51,7 @@ struct IpadHomeView: View {
 	}
 }
 
-//MARK: -Preview
+	//MARK: -Preview
 struct IpadHomeView_Previews: PreviewProvider {
 	static var previews: some View {
 		
