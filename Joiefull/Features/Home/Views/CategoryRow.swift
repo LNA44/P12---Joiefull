@@ -15,7 +15,7 @@ struct CategoryRow: View {
 	@ObservedObject var detailsViewModel: DetailsViewModel
 	var categoryName: String
 	var items: [Product] = []
-	var selectedProduct: Binding<Product?>? //afficher la vue detail sur ipad sans naviguer (changer d'écran), optionnel pour n'être utilisé que sur iPad
+	var selectedProduct: Binding<Product?>?
 	
 	//MARK: -Initialization
 	init(categoryName: String = "", items: [Product] = [], selectedProduct: Binding<Product?>? = nil, detailsViewModel: DetailsViewModel) {
@@ -55,8 +55,6 @@ struct CategoryRow: View {
 		if horizontalSizeClass == .compact {
 			//iPhone: navigation
 			NavigationLink(destination: DetailsView(product: product, detailsViewModel: detailsViewModel)
-				.environmentObject(ratingsVM)
-				.environmentObject(favoriteVM)
 			) {
 				CategoryItem(product: product)
 					.frame(maxHeight: .infinity, alignment: .top)
@@ -68,8 +66,6 @@ struct CategoryRow: View {
 				selectedProduct?.wrappedValue = product
 			} label: {
 				CategoryItem(isSelected: selectedProduct?.wrappedValue == product, product: product)
-					.environmentObject(ratingsVM)
-					.environmentObject(favoriteVM)
 			}
 			.buttonStyle(PlainButtonStyle())
 		}

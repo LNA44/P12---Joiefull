@@ -34,7 +34,7 @@ struct Product: Decodable, Identifiable, Equatable {
 	
 	enum CodingKeys: String, CodingKey {
 		case id, picture, name, likes, price, category
-		case originalPrice = "original_price"  // on indique que originalPrice = original_price dans JSON
+		case originalPrice = "original_price"  // originalPrice = original_price dans JSON
 	}
 	
 	struct Picture: Decodable {

@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-struct ShareSheet: UIViewControllerRepresentable { //création vue en UIKit dans app en SwiftUI
+struct ShareSheet: UIViewControllerRepresentable { //création vue en UIKit 
 	var productImageURL: String
 	var defaultComment: String
 	@Binding var isPresented: Bool

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IphoneHomeView: View {
 	//MARK: -Public properties
-	@ObservedObject var viewModel: HomeViewModel //recoit le VM du parent
+	@ObservedObject var viewModel: HomeViewModel 
 	@ObservedObject var detailsViewModel: DetailsViewModel
 	
 	//MARK: -Body

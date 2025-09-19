@@ -11,15 +11,15 @@ struct DetailsView: View {
 	//MARK: -Public properties
 	var product: Product
 	@Environment(\.horizontalSizeClass) var horizontalSizeClass
-	@Environment(\.colorScheme) var colorScheme //définit les couleurs pour modes clair et sombre
+	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var ratingsVM: RatingsViewModel
 	@EnvironmentObject var favoriteVM: FavoriteViewModel
 	@ObservedObject var detailsViewModel: DetailsViewModel
 	
 	//MARK: -Private properties
-	@Environment(\.dismiss) private var dismiss  // Pour fermer la vue
+	@Environment(\.dismiss) private var dismiss
 	@State private var isImageFullscreen = false
-	@State private var userComment: String = "" //modifie la vue à chaque nouvelle lettre tapée
+	@State private var userComment: String = ""
 	@State private var showShareSheet = false
 	@State private var sharingComment: String = ""
 	@State private var imageSize: CGSize = .zero
@@ -33,7 +33,7 @@ struct DetailsView: View {
 	
 	//MARK: -Body
 	var body: some View {
-		GeometryReader { geo in //pour adapter taille et dispo en fonction de taille écran iphone ou ipad
+		GeometryReader { geo in 
 			let imageWidth = geo.size.width * 0.9
 			let imageHeight = geo.size.height * 0.55
 			ScrollView {
@@ -55,7 +55,7 @@ struct DetailsView: View {
 					FullscreenImageView(imageURL: product.picture.imageURL)
 						.accessibilityLabel("Image en plein écran")
 				}
-				.navigationBarBackButtonHidden(true)  // Cache le bouton retour natif
+				.navigationBarBackButtonHidden(true)
 				.navigationBarHidden(horizontalSizeClass == .regular)
 				.toolbar {
 					if horizontalSizeClass == .compact {
@@ -75,7 +75,7 @@ struct DetailsView: View {
 			.onAppear {
 				favoriteVM.setInitialLikes(for: product.id, count: product.likes) //nombre de likes au départ = ceux reçu par l'API
 			}
-			.onTapGesture { // quand on tape en dehors du TextEditor le clavier est retiré
+			.onTapGesture {
 				isCommentFocused = false
 			}
 		}
@@ -85,8 +85,8 @@ struct DetailsView: View {
 	private func sectionImageProduit(imageWidth: CGFloat, imageHeight: CGFloat) -> some View {
 		ZStack {
 			HStack {
-				if let url = product.picture.imageURL { //optionnel donc vérif pas nil
-					AsyncImageView(url: url, width: imageWidth, height: imageHeight) //position adaptable iphone-ipad : 90% de la longueur et 55% de la largeur
+				if let url = product.picture.imageURL {
+					AsyncImageView(url: url, width: imageWidth, height: imageHeight)
 						.background(
 							GeometryReader { imageGeo in
 								Color.clear
@@ -125,7 +125,7 @@ struct DetailsView: View {
 		Button (action: {
 			favoriteVM.toggleFavorite(for: product.id)
 			
-			DispatchQueue.main.async { //annonce du changement de statut par VoiceOver
+			DispatchQueue.main.async {
 				UIAccessibility.post(
 					notification: .announcement,
 					argument: favoriteVM.isFavorite(product.id) ? "Ajouté aux favoris" : "Retiré des favoris"
@@ -222,7 +222,7 @@ struct DetailsView: View {
 		HStack {
 			Text("\(product.picture.description)")
 				.font(.system(size: 18))
-				.lineLimit(nil)         // autorise autant de lignes que nécessaire
+				.lineLimit(nil)
 				.fixedSize(horizontal: false, vertical: true) // permet au texte de s'étendre verticalement
 				.frame(maxWidth: .infinity, alignment: .leading)
 				.padding(.top, 5)
@@ -326,13 +326,13 @@ struct DetailsView: View {
 						}
 						.padding(.horizontal, 20)
 					}
-					.frame(maxHeight: 300) // tu peux ajuster la hauteur
+					.frame(maxHeight: 300)
 				}
 			}
 		}
 		.padding(.horizontal, 20)
 		.toolbar {
-			ToolbarItemGroup(placement: .keyboard) { //ajoute un bouton pour replier le clavier
+			ToolbarItemGroup(placement: .keyboard) {
 				Button {
 					isCommentFocused = false
 				} label: {
@@ -399,7 +399,7 @@ struct DetailsView_Previews: PreviewProvider {
 	
 	static let viewModel = DetailsViewModel()
 	static var previews: some View {
-		NavigationStack { //utile pour afficher bouton retour, vérifier que navigationbar cachée,...
+		NavigationStack {
 			DetailsView(product: fakeProduct, detailsViewModel:viewModel)
 				.environmentObject(ratingsVM)
 				.environmentObject(favoriteVM)

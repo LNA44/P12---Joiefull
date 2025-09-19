@@ -39,7 +39,6 @@ struct CategoryItem: View {
 			Spacer()
 		}
 		.onAppear {
-			// Initialiser les likes
 			if favoriteVM.likesCount(for: product.id) == 0 {
 				favoriteVM.setInitialLikes(for: product.id, count: product.likes)
 			}
@@ -50,7 +49,7 @@ struct CategoryItem: View {
 	//MARK: -Sections
 	private var productImageSection: some View {
 		ZStack {
-			if let url = product.picture.imageURL { //optionnel donc vérif pas nil
+			if let url = product.picture.imageURL {
 				AsyncImageView(url: url, width: imageWidth, height: imageHeight)
 					.overlay(
 						RoundedRectangle(cornerRadius: 16)
@@ -92,7 +91,7 @@ struct CategoryItem: View {
 						design: .default
 					))
 					.multilineTextAlignment(.leading)
-					.lineLimit(nil)       // aucune limite de lignes
+					.lineLimit(nil)
 					.fixedSize(horizontal: false, vertical: true)
 			}
 			
@@ -117,7 +116,7 @@ struct CategoryItem: View {
 	
 	var productPrice: some View {
 		HStack {
-			Text("\(String(format: "%.0f", product.price))€") //arrondi 0 chiffre après la virgule
+			Text("\(String(format: "%.0f", product.price))€") 
 				.foregroundColor(isSelected ? Color("SelectedItem") : Color.primary)
 				.font(.system(
 					size: horizontalSizeClass == .compact ? 14 : 18,

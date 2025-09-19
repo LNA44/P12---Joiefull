@@ -38,11 +38,9 @@ struct StarRatingView_Previews: PreviewProvider {
 	
 	static var previews: some View {
 		Group {
-			// Preview simple
 			StarRatingView(rating: $previewRating)
 				.previewDisplayName("Par défaut")
 			
-			// Preview avec paramètres personnalisés
 			StarRatingView(
 				rating: $previewRating,
 				maximumRating: 10,

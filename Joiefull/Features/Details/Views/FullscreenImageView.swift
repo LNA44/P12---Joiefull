@@ -10,7 +10,7 @@ import SwiftUI
 struct FullscreenImageView: View {
 	//MARK: -Public properties
 	var imageURL: URL?
-	@Environment(\.dismiss) var dismiss // fermer une vue présentée depuis la vue elle-même (sheet)
+	@Environment(\.dismiss) var dismiss 
 	
 	//MARK: -Body
 	var body: some View {

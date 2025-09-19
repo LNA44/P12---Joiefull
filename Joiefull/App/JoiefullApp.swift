@@ -19,7 +19,6 @@ struct JoiefullApp: App {
 			if showLaunchView {
 				LaunchView()
 					.onAppear {
-						// Simuler un délai de lancement, puis passer à HomeView
 						DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 							withAnimation {
 								showLaunchView = false

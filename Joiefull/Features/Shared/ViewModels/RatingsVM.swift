@@ -22,15 +22,12 @@ class RatingsViewModel: ObservableObject {
 	//MARK: -Methods
 	func addRating(rating: Double, for productId: Int) {
 		if let oldRating = userRatings[productId] {
-			// L'utilisateur a déjà voté: remplacer sa note dans allRatings
 			if let index = allRatings[productId]?.firstIndex(of: oldRating) {
 				allRatings[productId]?[index] = rating
 			}
 		} else {
-			// Premier vote: ajouter la note
-			allRatings[productId, default: []].append(rating) //defaut pour éviter un nil, on crée un tableau vide
+			allRatings[productId, default: []].append(rating)
 		}
-		// Mettre à jour (ou enregistrer) le vote de l'utilisateur
 		userRatings[productId] = rating
 	}
 	
@@ -41,7 +38,7 @@ class RatingsViewModel: ObservableObject {
 		return total / Double(ratings.count)
 	}
 	
-	func getUserRating(for productId: Int) -> Double { //utile pour qu'à l'ouverture d'un produit on retrouve la note donnée par l'utilisateur avec le nombre d'étoiles sélectionnées
+	func getUserRating(for productId: Int) -> Double { 
 		return userRatings[productId] ?? 0.0
 	}
 }
